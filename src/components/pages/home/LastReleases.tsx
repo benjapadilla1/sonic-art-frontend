@@ -74,16 +74,16 @@ export const LastReleases = () => {
           {courses.map((course, i) => (
             <CarouselItem
               key={i}
-              className="basis-full transition-transform duration-300 hover:scale-105 md:basis-1/3"
+              className="group basis-full transition-all duration-500 md:basis-1/3"
             >
-              <div className="bg-backgroundLight flex h-full flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm">
+              <div className="bg-backgroundLight flex h-full flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl">
                 <div className="h-96 w-full overflow-hidden rounded-xl">
                   <Image
                     src={course.courseImage}
                     alt={course.title}
                     width={700}
                     height={500}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
                 <div className="flex items-center gap-2">

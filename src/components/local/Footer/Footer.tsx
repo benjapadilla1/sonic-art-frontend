@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const Footer = () => {
@@ -7,8 +8,9 @@ export const Footer = () => {
     <footer className="bg-secondaryLight px-6 py-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-black">Sonic Lab</h2>
-          <p className="text-muted-foreground mt-2 max-w-xs text-sm">Aca iria el slogan</p>
+          <Link href={'/'}>
+            <Image alt="Logo" width={80} height={60} src={'/images/logos/logo_black.png'} />
+          </Link>
         </div>
 
         <div className="flex flex-col gap-2 text-sm md:text-base">
