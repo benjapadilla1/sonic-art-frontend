@@ -18,7 +18,8 @@ export function NavbarMenu() {
           <Link href="/about" passHref>
             <NavigationMenuLink
               className={
-                (navigationMenuTriggerStyle(), 'text-backgroundLight text-lg font-semibold')
+                (navigationMenuTriggerStyle(),
+                'font-engravers text-backgroundLight text-lg font-semibold')
               }
             >
               Cursos
@@ -29,7 +30,8 @@ export function NavbarMenu() {
           <Link href="/about" passHref>
             <NavigationMenuLink
               className={
-                (navigationMenuTriggerStyle(), 'text-backgroundLight text-lg font-semibold')
+                (navigationMenuTriggerStyle(),
+                'font-engravers text-backgroundLight text-lg font-semibold')
               }
             >
               Sample Packs
@@ -40,7 +42,8 @@ export function NavbarMenu() {
           <Link href="/about" passHref>
             <NavigationMenuLink
               className={
-                (navigationMenuTriggerStyle(), 'text-backgroundLight text-lg font-semibold')
+                (navigationMenuTriggerStyle(),
+                'font-engravers text-backgroundLight text-lg font-semibold')
               }
             >
               Clases 1 a 1
@@ -51,7 +54,8 @@ export function NavbarMenu() {
           <Link href="/about" passHref>
             <NavigationMenuLink
               className={
-                (navigationMenuTriggerStyle(), 'text-backgroundLight text-lg font-semibold')
+                (navigationMenuTriggerStyle(),
+                'font-engravers text-backgroundLight text-lg font-semibold')
               }
             >
               Sobre nosotros
@@ -62,7 +66,8 @@ export function NavbarMenu() {
           <Link href="/contacto" passHref>
             <NavigationMenuLink
               className={
-                (navigationMenuTriggerStyle(), 'text-backgroundLight text-lg font-semibold')
+                (navigationMenuTriggerStyle(),
+                'font-engravers text-backgroundLight text-lg font-semibold')
               }
             >
               Contacto

@@ -68,7 +68,9 @@ const courses = [
 export const LastReleases = () => {
   return (
     <Section className="bg-secondaryLight">
-      <h2 className="mb-8 text-center text-3xl font-semibold">Últimos lanzamientos</h2>
+      <h2 className="font-engravers mb-8 text-center text-3xl font-semibold">
+        Últimos lanzamientos
+      </h2>
       <Carousel>
         <CarouselContent>
           {courses.map((course, i) => (
@@ -94,7 +96,7 @@ export const LastReleases = () => {
                   <p className="font-medium">{course.creator}</p>
                 </div>
                 <p className="text-xs text-gray-500">{course.date}</p>
-                <p className="text-lg font-semibold">{course.title}</p>
+                <p className="font-engravers text-lg font-semibold">{course.title}</p>
                 <p className="text-sm text-gray-700">{course.description}</p>
               </div>
             </CarouselItem>

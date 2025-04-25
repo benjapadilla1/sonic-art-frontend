@@ -25,22 +25,22 @@ export const Hero = () => {
       >
         <source src="/videos/sampleVideo.mp4" type="video/mp4" />
       </video>
-      <div className="relative z-10 flex h-full flex-row items-center justify-center gap-4 bg-black/50 px-2 text-center">
-        <div className="h-fit overflow-hidden">
+      <div className="relative z-10 flex h-full flex-row items-center bg-black/50 px-2 pl-14 text-center">
+        <div className="relative grid h-[1.2em] w-[12ch]">
+          <h1 className="font-engravers text-4xl font-bold text-white md:text-7xl">Creatividad</h1>
           <AnimatePresence mode="wait">
             <motion.h1
               key={words[index]}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl font-bold text-white md:text-6xl"
+              className="font-engravers absolute bottom-0 left-0 text-4xl font-bold text-white md:text-7xl"
             >
               {words[index]}
             </motion.h1>
           </AnimatePresence>
         </div>
-        <h1 className="text-4xl font-bold text-white md:text-6xl">Creatividad</h1>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import Section from '@/components/ui/section';
 import { Quote } from 'lucide-react';
+import { LabelLogoCarousel } from './LabelLogoCarousel';
 
 const reviews = [
   {
@@ -33,7 +34,9 @@ const reviews = [
 export const Testimonials = () => {
   return (
     <Section className="">
-      <p className="mb-12 text-center text-3xl font-semibold">Opiniones de nuestros alumnos</p>
+      <p className="font-engravers mb-12 text-center text-3xl font-semibold">
+        Opiniones de nuestros alumnos
+      </p>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         {reviews.map((review, i) => (
           <Card
@@ -64,7 +67,7 @@ export const Testimonials = () => {
           </Card>
         ))}
       </div>
-      {/* <LabelLogoCarousel /> */}
+      <LabelLogoCarousel />
     </Section>
   );
 };

@@ -45,11 +45,14 @@ const NavBar: React.FC = () => {
       </div>
       <NavbarMenu />
       <div className="flex gap-4">
-        <Button className="border-ctas rounded-none border-2 bg-transparent" asChild>
-          <Link href="/login">Iniciar sesión</Link>
+        <Button className="border-ctas font-engravers rounded-none border-2 bg-transparent" asChild>
+          <Link href="/login">Iniciar Sesión</Link>
         </Button>
-        <Button className="border-ctas rounded-none border-2 hover:bg-transparent" asChild>
-          <Link href="/login">Registarse</Link>
+        <Button
+          className="border-ctas font-engravers rounded-none border-2 hover:bg-transparent"
+          asChild
+        >
+          <Link href="/login">Registrarse</Link>
         </Button>
       </div>
     </nav>
