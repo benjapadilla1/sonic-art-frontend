@@ -20,8 +20,8 @@ export const Footer = () => {
           <Link href="/sample-packs" className="text-muted-foreground transition hover:text-black">
             Sample Packs
           </Link>
-          <Link href="/mentoria" className="text-muted-foreground transition hover:text-black">
-            Mentoría 1 a 1
+          <Link href="/clases" className="text-muted-foreground transition hover:text-black">
+            Clases 1 a 1
           </Link>
           <Link href="/contacto" className="text-muted-foreground transition hover:text-black">
             Contacto

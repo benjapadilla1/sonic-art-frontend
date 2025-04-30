@@ -17,10 +17,12 @@ const page = () => {
       <div className="flex items-center justify-center px-6 md:px-16">
         <div className="w-full max-w-xl space-y-8">
           <div className="space-y-2 text-center md:text-left">
-            <h1 className="text-secondaryBlack text-3xl font-bold">Contactate con nosotros</h1>
+            <h1 className="text-secondaryBlack font-engravers text-3xl font-bold">
+              Contactate con nosotros
+            </h1>
             <p className="text-secondaryBlack">
-              ¿Tenés alguna duda, consulta o simplemente querés saludar? Completá el formulario y te
-              responderemos a la brevedad.
+              ¿Tenés una pregunta, una idea o simplemente querés decir hola? Dejanos tu mensaje y
+              nos pondremos en contacto a la brevedad. ¡Nos encantaría saber de vos!
             </p>
           </div>
 

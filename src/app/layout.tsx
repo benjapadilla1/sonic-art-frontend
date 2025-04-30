@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Sonic Art',
-  description: 'Sonic Art',
+  title: 'Sonic Art | Cursos de Producción Musical',
+  description:
+    'Aprende producción musical con cursos online, sample packs y mentorías personalizadas.',
 };
 
 export default function RootLayout({

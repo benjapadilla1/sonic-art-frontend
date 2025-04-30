@@ -15,7 +15,7 @@ export function NavbarMenu() {
     <NavigationMenu>
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
-          <Link href="/about" passHref>
+          <Link href="/cursos" passHref>
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
@@ -27,7 +27,7 @@ export function NavbarMenu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/about" passHref>
+          <Link href="/sample-packs" passHref>
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
@@ -39,7 +39,7 @@ export function NavbarMenu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/about" passHref>
+          <Link href="/clases" passHref>
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
@@ -51,7 +51,7 @@ export function NavbarMenu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/about" passHref>
+          <Link href="/sobre-nosotros" passHref>
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),

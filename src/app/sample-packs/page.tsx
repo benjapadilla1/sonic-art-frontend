@@ -1,4 +1,4 @@
-import { FAQs } from '@/components/pages/courses/FAQs';
+import { FAQs } from '@/components/pages/samplePacks/FAQs';
 
 const page = () => {
   return (

@@ -21,7 +21,7 @@ export const LabelLogoCarousel = () => {
   return (
     <div className="overflow-hidden pt-24 backdrop-blur-md">
       <p className="font-engravers py-10 text-center text-3xl font-semibold">
-        Nuestros alumnos lanzaron sellos como
+        Nuestros alumnos firmaron en sellos como:
       </p>
       <motion.div
         className="flex w-max gap-12 px-6"
