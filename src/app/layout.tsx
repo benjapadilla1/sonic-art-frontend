@@ -2,6 +2,7 @@ import { Footer } from '@/components/local/Footer/Footer';
 import NavBar from '@/components/local/Navbar/NavBar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const geistSans = Geist({
@@ -37,6 +38,17 @@ export default function RootLayout({
           name="description"
           content="Aprende producción musical con cursos online, sample packs y mentorías personalizadas."
         />
+        <Script id="trustpilot-widget" strategy="afterInteractive">
+          {`
+            (function(w,d,s,r,n){
+              w.TrustpilotObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+              var a=d.createElement(s);a.async=1;a.src=r;a.type='text/java'+s;
+              var f=d.getElementsByTagName(s)[0];
+              f.parentNode.insertBefore(a,f)
+            })(window,document,'script', 'https://invitejs.trustpilot.com/tp.min.js', 'tp');
+            tp('register', 'MhtJ7lAtHo1nMuBU');
+          `}
+        </Script>
       </head>
       <body
         className={`${geistSans.variable} bg-backgroundLight ${geistMono.variable} antialiased`}
