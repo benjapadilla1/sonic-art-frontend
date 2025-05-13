@@ -25,7 +25,6 @@ const LatestVideos = () => {
           `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`
         );
         const data = await res.json();
-        console.log(data);
         setVideos(data.items);
       } catch (error) {
         console.error('Error fetching videos:', error);
@@ -37,10 +36,8 @@ const LatestVideos = () => {
 
   if (!videos.length || !videos) return <p className="text-center">Cargando videos...</p>;
 
-  console.log(videos);
-
   return (
-    <Section className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <Section className="grid grid-cols-1 gap-8 md:grid-cols-3">
       {videos.map((video, idx) => (
         <div key={idx} className="flex flex-col gap-2">
           <iframe
@@ -50,7 +47,7 @@ const LatestVideos = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-          <p className="text-sm font-semibold">{video.snippet.title}</p>
+          <p className="font-engravers font-bold">{video.snippet.title}</p>
         </div>
       ))}
     </Section>

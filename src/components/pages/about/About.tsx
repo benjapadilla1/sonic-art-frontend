@@ -1,87 +1,94 @@
-import { Card, CardContent } from '@/components/ui/card';
+'use client';
+
+import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/section';
-import { Separator } from '@/components/ui/separator';
+import { motion } from 'framer-motion';
 
-const About = () => {
+export default function AboutUsSection() {
   return (
-    <div className="space-y-12">
-      <Section>
-        <h1 className="mb-4 text-4xl font-bold">Sobre Nosotros</h1>
-        <p className="text-muted-foreground text-lg">
-          Somos una plataforma creada por y para productores musicales. Nuestro objetivo es ayudarte
-          a crecer, aprender y conectar con otros artistas apasionados como vos.
-        </p>
-      </Section>
-
-      <Section>
-        <h2 className="mb-2 text-2xl font-semibold">Nuestra Misión</h2>
-        <Separator className="mb-4" />
-        <p className="text-muted-foreground">
-          Democratizar el acceso al conocimiento y las herramientas profesionales del mundo de la
-          producción musical. Queremos que puedas llevar tu arte al siguiente nivel sin importar tu
-          experiencia previa o tus recursos.
-        </p>
-      </Section>
-
-      <Section>
-        <h2 className="mb-2 text-2xl font-semibold">Qué Ofrecemos</h2>
-        <Separator className="mb-4" />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-2 text-xl font-bold">Cursos Online</h3>
-              <p className="text-muted-foreground">
-                Desde fundamentos hasta técnicas avanzadas, nuestros cursos están diseñados por
-                productores activos en la industria.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-2 text-xl font-bold">Sample Packs</h3>
-              <p className="text-muted-foreground">
-                Packs originales de alta calidad listos para usar en tus producciones. Sonidos que
-                inspiran.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-2 text-xl font-bold">Mentorías 1 a 1</h3>
-              <p className="text-muted-foreground">
-                Clases personalizadas con artistas y productores profesionales. Recibí feedback real
-                y llevá tu música a otro nivel.
-              </p>
-            </CardContent>
-          </Card>
+    <Section className="relative flex flex-col gap-24 py-20">
+      <motion.div
+        className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <div>
+          <h3 className="font-engravers text-secondaryBlack mb-4 text-2xl font-semibold">
+            Mi historia
+          </h3>
+          <p className="mb-6 leading-relaxed">
+            Mi nombre es Joaquín Arab Cohen, soy compositor, productor musical y diseñador sonoro
+            nacido en Córdoba, Argentina. Desde muy chico sentí una conexión profunda con la música:
+            empecé tocando la flauta y el piano, explorando ese mundo que parecía no tener límites.
+            Más adelante, fue la música electrónica la que captó mi atención. Fascinado por los
+            sonidos sintéticos y las posibilidades de los sintetizadores, comencé a crear mis
+            propias producciones, transitando estilos que iban desde el house hasta la música
+            experimental.
+          </p>
+          <p className="leading-relaxed">
+            Mi búsqueda artística me llevó a viajar por Europa, donde me enfoqué en desarrollar mi
+            carrera como productor de música electrónica. Esa experiencia de vida, tan
+            enriquecedora, expandió no sólo mi mirada sobre la música, sino también sobre la
+            creatividad en general. Al regresar a Argentina, sentí la necesidad de unir dos mundos
+            que me apasionaban: la música electrónica y la música orquestal. Esta fusión de lo
+            orgánico y lo sintético definió mi estilo como compositor y me abrió las puertas a
+            nuevos desafíos, como la creación de la banda sonora original de la película "La Mujer
+            De Vidrio", donde combiné instrumentos clásicos, sintetizadores y matices de la música
+            nativa argentina.
+          </p>
+          <p className="leading-relaxed">
+            En el ámbito de la música electrónica, soy conocido como J. Koen, nombre bajo el cual he
+            firmado tracks en sellos icónicos como Nervous Records y Nite Grooves, entre otros. Mi
+            sonido actual toma influencias del house, el jazz, el funk, el soul y el disco,
+            manteniendo siempre viva la intención de transmitir emoción a través de cada producción.
+          </p>
         </div>
-      </Section>
+        <div className="flex flex-col gap-6">
+          <iframe
+            style={{ borderRadius: '12px' }}
+            src="https://open.spotify.com/embed/artist/3QbVOovjszdth5tVlhaRXt?utm_source=generator&theme=0"
+            width="100%"
+            height="352"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+          <iframe
+            style={{ borderRadius: '12px' }}
+            src="https://open.spotify.com/embed/artist/0J6pS88bfD9OL3FYOA6WA3?utm_source=generator"
+            width="100%"
+            height="352"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </motion.div>
 
-      <Section>
-        <h2 className="mb-2 text-2xl font-semibold">Nuestra Comunidad</h2>
-        <Separator className="mb-4" />
-        <p className="text-muted-foreground mb-4">
-          Creemos en el poder de compartir. Por eso construimos una comunidad activa en Discord
-          donde podés mostrar tus beats, colaborar, recibir feedback y mantenerte motivado.
+      <motion.div
+        className="mx-auto max-w-4xl text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h3 className="font-engravers text-secondaryBlack mb-4 text-2xl font-semibold">
+          ¿Cómo nació Sonic Art?
+        </h3>
+        <p className="text-lg leading-relaxed">
+          Sonic Art nació de una necesidad muy personal. Cuando yo mismo comencé a estudiar
+          producción musical, me enfrenté a un océano de información desordenada y abrumadora. Esa
+          sobrecarga de datos muchas veces no hacía más que frustrarme y hacerme sentir que crear
+          buena música era una meta inalcanzable. Fue a través de años de experiencia, estudio y
+          errores que descubrí que, en realidad, menos es más: que simplificando procesos,
+          entendiendo principios esenciales y enfocándose en lo importante, cualquier persona puede
+          alcanzar un sonido profesional. A partir de mi experiencia trabajando como instructor y
+          mentor de artistas de distintos niveles, sentí que era hora de crear un espacio diferente.
+          Un lugar donde aprender a producir música fuera claro, motivador y práctico, sin vueltas
+          innecesarias ni tecnicismos vacíos. Así nació Sonic Art, con el propósito de simplificar,
+          impulsar y potenciar la creatividad de cada artista.
         </p>
-      </Section>
-
-      <Section>
-        <h2 className="mb-2 text-2xl font-semibold">Sumate al Movimiento</h2>
-        <Separator className="mb-4" />
-        <p className="text-muted-foreground mb-6">
-          Si sos productor, beatmaker o simplemente alguien con amor por la música, esta plataforma
-          es para vos.
-        </p>
-        <a
-          href="/registro"
-          className="bg-primary text-primary-foreground inline-block rounded-xl px-6 py-3 font-semibold transition hover:brightness-110"
-        >
-          Crear cuenta
-        </a>
-      </Section>
-    </div>
+      </motion.div>
+    </Section>
   );
-};
-
-export default About;
+}

@@ -34,7 +34,7 @@ const reviews = [
 export const Testimonials = () => {
   return (
     <Section className="">
-      <p className="font-engravers mb-12 text-center text-3xl font-semibold">
+      <p className="font-engravers text-secondaryBg mb-12 text-center text-3xl font-semibold">
         Experiencias de nuestra comunidad
       </p>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">

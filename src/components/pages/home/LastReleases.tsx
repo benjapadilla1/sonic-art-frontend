@@ -68,7 +68,7 @@ const courses = [
 export const LastReleases = () => {
   return (
     <Section className="bg-secondaryLight">
-      <h2 className="font-engravers mb-8 text-center text-3xl font-semibold">
+      <h2 className="font-engravers text-secondaryBg mb-8 text-center text-3xl font-semibold">
         Últimos lanzamientos
       </h2>
       <Carousel>

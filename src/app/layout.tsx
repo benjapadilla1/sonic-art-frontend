@@ -27,6 +27,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="trustpilot-one-time-domain-verification-id"
+          content="946b0be5-ac82-4bfe-9b3b-db5f57128759"
+        />
+        <title>Sonic Art | Cursos de Producción Musical</title>
+        <meta
+          name="description"
+          content="Aprende producción musical con cursos online, sample packs y mentorías personalizadas."
+        />
+      </head>
       <body
         className={`${geistSans.variable} bg-backgroundLight ${geistMono.variable} antialiased`}
       >

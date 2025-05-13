@@ -1,9 +1,10 @@
 import { ContactForm } from '@/components/pages/contact/ContactForm';
+import Section from '@/components/ui/section';
 import Image from 'next/image';
 
 const page = () => {
   return (
-    <div className="grid h-screen grid-cols-1 py-20 md:grid-cols-2">
+    <Section className="grid h-screen grid-cols-1 py-20 md:grid-cols-2">
       <div className="relative mt-10 ml-20 hidden h-[600px] w-[900px] md:block">
         <Image
           fill
@@ -20,16 +21,21 @@ const page = () => {
             <h1 className="text-secondaryBlack font-engravers text-3xl font-bold">
               Contactate con nosotros
             </h1>
-            <p className="text-secondaryBlack">
-              ¿Tenés una pregunta, una idea o simplemente querés decir hola? Dejanos tu mensaje y
-              nos pondremos en contacto a la brevedad. ¡Nos encantaría saber de vos!
-            </p>
+            <div className="flex flex-col justify-center gap-1 md:justify-start">
+              <p className="text-secondaryBlack">
+                ¿Tenés una pregunta, una idea o simplemente querés decir hola?
+              </p>
+              <p className="text-secondaryBlack pl-1">
+                Dejanos tu mensaje y nos pondremos en contacto a la brevedad. ¡Nos encantaría saber
+                de vos!
+              </p>
+            </div>
           </div>
 
           <ContactForm />
         </div>
       </div>
-    </div>
+    </Section>
   );
 };
 
