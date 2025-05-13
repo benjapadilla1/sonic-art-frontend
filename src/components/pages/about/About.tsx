@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/section';
 import { motion } from 'framer-motion';
 
@@ -34,9 +33,9 @@ export default function AboutUsSection() {
             creatividad en general. Al regresar a Argentina, sentí la necesidad de unir dos mundos
             que me apasionaban: la música electrónica y la música orquestal. Esta fusión de lo
             orgánico y lo sintético definió mi estilo como compositor y me abrió las puertas a
-            nuevos desafíos, como la creación de la banda sonora original de la película "La Mujer
-            De Vidrio", donde combiné instrumentos clásicos, sintetizadores y matices de la música
-            nativa argentina.
+            nuevos desafíos, como la creación de la banda sonora original de la película &quot;La
+            Mujer De Vidrio&quot;, donde combiné instrumentos clásicos, sintetizadores y matices de
+            la música nativa argentina.
           </p>
           <p className="leading-relaxed">
             En el ámbito de la música electrónica, soy conocido como J. Koen, nombre bajo el cual he
