@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: 'Sonic Art | Cursos de Producción Musical',
   description:
     'Aprende producción musical con cursos online, sample packs y mentorías personalizadas.',
+  other: {
+    'trustpilot-one-time-domain-verification-id': '946b0be5-ac82-4bfe-9b3b-db5f57128759',
+  },
 };
 
 export default function RootLayout({
@@ -40,14 +43,14 @@ export default function RootLayout({
         />
         <Script id="trustpilot-widget" strategy="afterInteractive">
           {`
-            (function(w,d,s,r,n){
-              w.TrustpilotObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
-              var a=d.createElement(s);a.async=1;a.src=r;a.type='text/java'+s;
-              var f=d.getElementsByTagName(s)[0];
-              f.parentNode.insertBefore(a,f)
-            })(window,document,'script', 'https://invitejs.trustpilot.com/tp.min.js', 'tp');
-            tp('register', 'MhtJ7lAtHo1nMuBU');
-          `}
+    (function(w,d,s,r,n){
+      w.TrustpilotObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+      var a=d.createElement(s);a.async=1;a.src=r;a.type='text/java'+s;
+      var f=d.getElementsByTagName(s)[0];
+      f.parentNode.insertBefore(a,f)
+    })(window,document,'script', 'https://invitejs.trustpilot.com/tp.min.js', 'tp');
+    tp('register', 'MhtJ7lAtHo1nMuBU');
+  `}
         </Script>
       </head>
       <body
