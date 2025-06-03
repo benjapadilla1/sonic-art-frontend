@@ -58,6 +58,7 @@
   --color-secondaryBg: var(--secondary-bg);
   --color-secondaryLight: var(--secondary-light);
   --color-secondaryBlack: var(--secondary-dark);
+  --color-totallyBlack: var(--totally-black);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -71,6 +72,7 @@
   --secondary-bg: #521503;
   --secondary-light: #f2ebe2;
   --secondary-dark: #442d1c;
+  --totally-black: #2b0d06;
   --foreground: oklch(0.13 0.028 261.692);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.13 0.028 261.692);

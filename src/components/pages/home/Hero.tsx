@@ -1,6 +1,8 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export const Hero = () => {
@@ -40,6 +42,9 @@ export const Hero = () => {
               {words[index]}
             </motion.h1>
           </AnimatePresence>
+          <Button asChild className="h-10 w-48 rounded-xl">
+            <Link href="/cursos">Explorá los cursos</Link>
+          </Button>
         </div>
       </div>
     </section>

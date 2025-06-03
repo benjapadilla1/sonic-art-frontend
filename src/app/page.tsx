@@ -3,6 +3,7 @@ import { Hero } from '@/components/pages/home/Hero';
 import { LastReleases } from '@/components/pages/home/LastReleases';
 import LatestVideos from '@/components/pages/home/LatestVideos';
 import Methodology from '@/components/pages/home/Metodology';
+import { StartYourJourney } from '@/components/pages/home/StartYourJourney';
 import { Testimonials } from '@/components/pages/home/Testimonials';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <Methodology />
       <Testimonials />
       <LastReleases />
+      <StartYourJourney />
       <LatestVideos />
       <DiscordSection />
     </div>
