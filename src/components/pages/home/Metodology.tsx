@@ -11,32 +11,28 @@ export default function Methodology() {
       title: 'A tu ritmo, sin presión',
       description:
         'Todo el contenido está pensado para que avances de manera flexible, respetando tu proceso creativo. La música nace mejor cuando te sentís libre, no apurado.',
-      image:
-        'https://images.pexels.com/photos/8133244/pexels-photo-8133244.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      image: '/images/methodology/step1.jpg',
     },
     {
       id: 2,
       title: 'Simple, claro y aplicable',
       description:
         'Cada explicación va directo al punto. Nos enfocamos en lo que realmente importa para que puedas usarlo en tu música de inmediato, sin enredos ni vueltas técnicas innecesarias.',
-      image:
-        'https://images.pexels.com/photos/29463308/pexels-photo-29463308.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      image: '/images/methodology/step2.png',
     },
     {
       id: 3,
       title: 'Crear tu propio sonido',
       description:
         'Más que enseñarte a copiar, te ayudamos a construir tu identidad sonora. Combinamos técnica, selección de sonidos y mentalidad para que cada track refleje quién sos.',
-      image:
-        'https://images.pexels.com/photos/8132964/pexels-photo-8132964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      image: '/images/methodology/step3.jpg',
     },
     {
       id: 4,
       title: 'Crecimiento real',
       description:
         'Actualizamos y mejoramos constantemente nuestros contenidos para acompañarte en todas las etapas: desde las primeras ideas hasta el desarrollo de un sonido profesional, claro y auténtico.',
-      image:
-        'https://images.pexels.com/photos/8197232/pexels-photo-8197232.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      image: '/images/methodology/step4.jpg',
     },
   ];
 

@@ -10,12 +10,12 @@ const page = () => {
           fill
           className="rounded-lg object-cover"
           priority
-          src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          src="/images/contact/contact.png"
           alt="Decorative contact"
         />
       </div>
 
-      <div className="flex items-center justify-center px-6 md:px-16">
+      <div className="flex items-center justify-center px-6 pt-16 md:px-16">
         <div className="w-full max-w-xl space-y-8">
           <div className="space-y-2 text-center md:text-left">
             <h1 className="text-secondaryBlack font-engravers text-3xl font-bold">

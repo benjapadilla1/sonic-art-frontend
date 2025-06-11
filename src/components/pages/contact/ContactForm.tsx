@@ -58,7 +58,7 @@ export const ContactForm = () => {
               <FormLabel>Nombre</FormLabel>
               <FormControl>
                 <Input
-                  className="border-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
+                  className="border-secondaryBlack text-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
                   placeholder="Nombre"
                   {...field}
                 />
@@ -75,7 +75,7 @@ export const ContactForm = () => {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  className="border-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
+                  className="border-secondaryBlack text-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
                   placeholder="Email"
                   {...field}
                 />
@@ -92,7 +92,7 @@ export const ContactForm = () => {
               <FormLabel>Mensaje</FormLabel>
               <FormControl>
                 <Textarea
-                  className="border-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
+                  className="border-secondaryBlack text-secondaryBlack placeholder:text-secondaryBlack focus:border-ctas focus:ring-ctas bg-backgroundLight rounded-md border"
                   placeholder="Tu mensaje"
                   {...field}
                 />

@@ -12,7 +12,7 @@ import {
 
 export function NavbarMenu() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="ml-34">
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
           <Link href="/cursos" passHref>

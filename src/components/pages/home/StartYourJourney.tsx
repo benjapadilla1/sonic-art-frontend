@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 export const StartYourJourney = () => {
   return (
-    <Section className="bg-ctas flex items-center justify-center gap-5 rounded-none text-white">
-      <div className="flex w-1/2 flex-col justify-center gap-4 px-8 py-16">
+    <Section className="bg-ctas flex items-center justify-center rounded-none !py-20 text-white">
+      <div className="flex w-1/2 flex-col justify-center gap-4 px-4 py-16">
         <p className="font-engravers text-4xl font-semibold">
           ¿Listo para comenzar tu camino en la producción musical?
         </p>
@@ -27,11 +27,9 @@ export const StartYourJourney = () => {
           </Button>
         </div>
       </div>
-      <div className="relative h-80 w-1/3">
+      <div className="relative h-90 w-1/3">
         <Image
-          src={
-            'https://images.pexels.com/photos/8132964/pexels-photo-8132964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-          }
+          src="/images/home/start-your-journey.jpg"
           alt="Test Image"
           fill
           className="rounded-xl object-cover"

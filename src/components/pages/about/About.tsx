@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutUsSection() {
   return (
-    <Section className="relative flex flex-col gap-24 py-20">
+    <Section className="bg-secondaryBg text-secondaryLight relative flex w-screen flex-col gap-24 py-20">
       <motion.div
         className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2"
         initial={{ opacity: 0 }}
@@ -14,10 +14,8 @@ export default function AboutUsSection() {
         transition={{ duration: 0.7 }}
       >
         <div>
-          <h3 className="font-engravers text-secondaryBlack mb-4 text-2xl font-semibold">
-            Mi historia
-          </h3>
-          <p className="mb-6 leading-relaxed">
+          <h3 className="font-engravers mb-4 text-4xl font-semibold">Mi historia</h3>
+          <p className="mb-4 text-lg leading-relaxed">
             Mi nombre es Joaquín Arab Cohen, soy compositor, productor musical y diseñador sonoro
             nacido en Córdoba, Argentina. Desde muy chico sentí una conexión profunda con la música:
             empecé tocando la flauta y el piano, explorando ese mundo que parecía no tener límites.
@@ -26,7 +24,7 @@ export default function AboutUsSection() {
             propias producciones, transitando estilos que iban desde el house hasta la música
             experimental.
           </p>
-          <p className="leading-relaxed">
+          <p className="text-lg leading-relaxed">
             Mi búsqueda artística me llevó a viajar por Europa, donde me enfoqué en desarrollar mi
             carrera como productor de música electrónica. Esa experiencia de vida, tan
             enriquecedora, expandió no sólo mi mirada sobre la música, sino también sobre la
@@ -37,7 +35,7 @@ export default function AboutUsSection() {
             Mujer De Vidrio&quot;, donde combiné instrumentos clásicos, sintetizadores y matices de
             la música nativa argentina.
           </p>
-          <p className="leading-relaxed">
+          <p className="text-lg leading-relaxed">
             En el ámbito de la música electrónica, soy conocido como J. Koen, nombre bajo el cual he
             firmado tracks en sellos icónicos como Nervous Records y Nite Grooves, entre otros. Mi
             sonido actual toma influencias del house, el jazz, el funk, el soul y el disco,

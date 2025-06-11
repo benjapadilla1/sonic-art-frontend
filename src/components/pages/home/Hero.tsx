@@ -25,7 +25,7 @@ export const Hero = () => {
         muted
         playsInline
       >
-        <source src="/videos/heroVideo.mp4" type="video/mp4" />
+        <source src="/videos/heroFinal.mp4" type="video/mp4" />
       </video>
       <div className="relative z-10 flex h-full flex-row items-center bg-black/50 px-2 pl-14 text-center">
         <div className="relative grid h-[1.2em] w-[12ch]">
