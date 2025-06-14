@@ -4,15 +4,14 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const logos = [
-  'https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/164821/pexels-photo-164821.jpeg?auto=compress&cs=tinysrgb&h=400',
-  'https://images.pexels.com/photos/164853/pexels-photo-164853.jpeg?auto=compress&cs=tinysrgb&h=400',
-  'https://images.pexels.com/photos/164967/pexels-photo-164967.jpeg?auto=compress&cs=tinysrgb&h=400',
-  'https://images.pexels.com/photos/114907/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&h=400',
-  'https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849822_960_720.jpg',
-  'https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/164821/pexels-photo-164821.jpeg?auto=compress&cs=tinysrgb&h=400',
-  'https://images.pexels.com/photos/164853/pexels-photo-164853.jpeg?auto=compress&cs=tinysrgb&h=400',
+  '/images/home/logos/BIENAIMER.png',
+  '/images/home/logos/Cyclic.png',
+  '/images/home/logos/MDTRAXX.png',
+  '/images/home/logos/Nervous-Records.png',
+  '/images/home/logos/OTHERWISE.png',
+  '/images/home/logos/Phonic.jpg',
+  '/images/home/logos/Selecta.png',
+  '/images/home/logos/WHOYOSTRO.png',
 ];
 
 const duplicatedLogos = [...logos, ...logos];

@@ -31,17 +31,17 @@ export const Footer = () => {
         <div className="flex flex-col gap-3">
           <span className="text-sm font-medium">Seguinos</span>
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" asChild>
+            <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" asChild>
+            <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" asChild>
+            <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-5 w-5" />
               </a>

@@ -49,19 +49,28 @@ export default function Methodology() {
 
       <div className="flex w-full items-stretch justify-center gap-8 overflow-x-auto px-4 md:px-8">
         {steps.map(step => (
-          <motion.div
-            className="bg-totallyBlack flex max-h-[600px] w-full max-w-[350px] flex-col items-center gap-2 rounded-lg p-8"
+          <div
+            className="group flex max-h-[600px] w-full max-w-[350px] flex-col items-center justify-center gap-2 transition-all duration-500"
             key={step.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
           >
-            <div className="relative mb-6 h-56 w-full overflow-hidden rounded-lg">
-              <Image src={step.image} alt={step.title} fill className="object-cover" />
-            </div>
-            <h3 className="text-backgroundLight text-2xl font-bold">{step.title}</h3>
-            <p className="text-backgroundLight flex-1 text-center">{step.description}</p>
-          </motion.div>
+            <motion.div
+              className="bg-totallyBlack size-full rounded-lg p-8 group-hover:-translate-y-1 group-hover:shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="relative mb-6 h-56 w-full overflow-hidden rounded-lg group-hover:-translate-y-1">
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="text-backgroundLight text-center text-2xl font-bold">{step.title}</h3>
+              <p className="text-backgroundLight flex-1 text-center">{step.description}</p>
+            </motion.div>
+          </div>
         ))}
       </div>
     </Section>
