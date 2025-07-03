@@ -2,6 +2,7 @@ import { Footer } from '@/components/local/Footer/Footer';
 import NavBar from '@/components/local/Navbar/NavBar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const geistSans = Geist({
@@ -40,8 +41,9 @@ export default function RootLayout({
           name="description"
           content="Aprende producción musical con cursos online, sample packs y mentorías personalizadas."
         />
+        <Script type="text/javascript" src="https://payhip.com/payhip.js"></Script>
         <script>
-              {`
+          {`
               (function(w,d,s,r,n){
                 w.TrustpilotObject=n;
                 w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
