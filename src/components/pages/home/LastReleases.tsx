@@ -86,7 +86,7 @@ export const LastReleases = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center pt-12">
+      <div className="flex justify-center px-4 pt-12">
         <Button asChild variant="ghost">
           <Link href="/cursos">
             <p className="text-ctas text-xl">Ver todos los cursos {'>'}</p>
