@@ -1,16 +1,25 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { register } from '@/functions/auth/Register';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type AuthMode = 'login' | 'register';
+
+export interface LogObject {
+  email: string;
+  password: string;
+}
 
 interface AuthFormProps {
   mode?: AuthMode;
 }
 
 export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
+  const router = useRouter();
+
   const [form, setForm] = useState({ email: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,17 +29,16 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (mode === 'login') {
-      // TODO: lógica de login
-      console.log('Logueando:', form);
+      router.push('/');
     } else {
-      // TODO: lógica de registro
-      console.log('Registrando:', form);
+      register(form);
+      router.push('/');
     }
   };
 
   return (
     <div className="w-full max-w-md rounded-xl border bg-white p-8 shadow-lg">
-      <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
+      <h2 className="font-engravers mb-6 text-center text-2xl font-bold text-gray-800">
         {mode === 'login' ? 'Iniciar sesión' : 'Crear una cuenta'}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">

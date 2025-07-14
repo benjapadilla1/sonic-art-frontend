@@ -3,6 +3,8 @@ import NavBar from '@/components/local/Navbar/NavBar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
 const geistSans = Geist({
@@ -61,6 +63,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} bg-backgroundLight ${geistMono.variable} antialiased`}
       >
+        <ToastContainer />
         <NavBar />
         <main>{children}</main>
         <Footer />

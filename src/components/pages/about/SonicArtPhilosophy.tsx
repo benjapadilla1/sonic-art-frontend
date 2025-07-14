@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/section';
 import { motion } from 'framer-motion';
 import { GraduationCap, Music2, Users } from 'lucide-react';
@@ -16,7 +15,7 @@ export const SonicArtPhilosophy = () => {
         className="flex flex-col items-center gap-12"
       >
         <h2 className="font-engravers text-center text-3xl font-bold tracking-widest text-white md:text-5xl">
-          Sumate a nuestra comunidad de artistas
+          Nuestra filosofía
         </h2>
 
         <div className="text-secondaryLight grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
@@ -43,29 +42,6 @@ export const SonicArtPhilosophy = () => {
             </p>
           </div>
         </div>
-
-        <div className="max-w-4xl space-y-6 text-base leading-loose tracking-wide text-pretty text-white/90 md:text-lg">
-          <p>
-            Hoy, a través de nuestros cursos, sample packs, mentorías y comunidad online,
-            acompañamos a productores de todo el mundo a dar pasos firmes en su camino musical.
-            Desde quienes recién comienzan a experimentar en un DAW, hasta productores más avanzados
-            que buscan perfeccionar sus mezclas o lanzar su música en sellos reconocidos.
-          </p>
-          <p>
-            Si estás buscando un lugar donde aprender de manera efectiva, desarrollar tu arte y
-            rodearte de una comunidad que te apoye en cada etapa, este es tu espacio.
-          </p>
-          <p className="font-semibold">
-            Te invitamos a sumarte a nuestra comunidad y comenzar a construir, hoy mismo, el sonido
-            de tu propia historia.
-          </p>
-        </div>
-
-        <Button className="mt-4 px-8 py-6 text-lg font-semibold transition" asChild>
-          <a href="https://discord.com/invite/mz8XdqrCjU" target="_blank" rel="noopener noreferrer">
-            Unirse a la comunidad
-          </a>
-        </Button>
       </motion.div>
     </Section>
   );
