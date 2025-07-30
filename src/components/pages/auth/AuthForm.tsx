@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { login } from '@/functions/auth/Login';
 import { register } from '@/functions/auth/Register';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -29,6 +30,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (mode === 'login') {
+      login(form);
       router.push('/');
     } else {
       register(form);
@@ -71,7 +73,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
             ¿No tenés cuenta?{' '}
             <Link
               href="/registro"
-              className="cursor-pointer font-semibold text-black hover:underline"
+              className="cursor-pointer font-semibold text-black underline hover:underline"
             >
               Registrate
             </Link>

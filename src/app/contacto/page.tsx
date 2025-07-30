@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 const page = () => {
   return (
-    <Section className="grid h-screen grid-cols-1 py-20 md:grid-cols-2">
-      <div className="relative mt-10 ml-20 hidden h-[600px] w-[900px] md:block">
+    <Section className="grid min-h-screen grid-cols-1 py-20 md:grid-cols-2">
+      <div className="relative hidden md:ml-20 md:block">
         <Image
           fill
           className="rounded-lg object-cover"
@@ -15,7 +15,7 @@ const page = () => {
         />
       </div>
 
-      <div className="flex items-center justify-center px-6 pt-16 md:px-16">
+      <div className="flex items-center justify-center px-4 pt-16 sm:px-8 md:px-16">
         <div className="w-full max-w-xl space-y-8">
           <div className="space-y-2 text-center md:text-left">
             <h1 className="text-secondaryBlack font-engravers text-3xl font-bold">

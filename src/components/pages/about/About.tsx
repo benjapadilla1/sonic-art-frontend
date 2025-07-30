@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutUsSection() {
   return (
-    <Section className="bg-secondaryBg text-secondaryLight relative flex w-screen flex-col gap-24 px-4 py-24">
+    <Section className="bg-secondaryBg text-secondaryLight relative flex w-screen flex-col gap-24 py-6">
       <motion.div
         className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-20 md:grid-cols-2"
         initial={{ opacity: 0 }}
@@ -13,33 +13,33 @@ export default function AboutUsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <div className="flex flex-col gap-8">
-          <h3 className="font-engravers text-secondaryLight mb-2 text-4xl leading-snug font-semibold md:text-5xl">
+        <div className="flex flex-col gap-6">
+          <h3 className="font-engravers text-secondaryLight text-4xl leading-snug font-semibold md:text-5xl">
             Mi historia
           </h3>
 
-          <p className="text-secondaryLight/90 text-lg leading-relaxed md:text-xl">
+          <p className="text-secondaryLight text-lg leading-relaxed md:text-xl">
             Mi nombre es <strong>Joaquín Arab Cohen</strong>, soy compositor, productor musical y
             diseñador sonoro nacido en Córdoba, Argentina. Desde muy chico sentí una conexión
             profunda con la música: empecé tocando la flauta y el piano, explorando ese mundo que
             parecía no tener límites.
           </p>
 
-          <p className="text-secondaryLight/90 text-lg leading-relaxed md:text-xl">
+          <p className="text-secondaryLight text-lg leading-relaxed md:text-xl">
             Más adelante, fue la música electrónica la que captó mi atención. Fascinado por los
             sonidos sintéticos y las posibilidades de los sintetizadores, comencé a crear mis
             propias producciones, transitando estilos que iban desde el house hasta la música
             experimental.
           </p>
 
-          <p className="text-secondaryLight/90 text-lg leading-relaxed md:text-xl">
+          <p className="text-secondaryLight text-lg leading-relaxed md:text-xl">
             Mi búsqueda artística me llevó a viajar por Europa, donde me enfoqué en desarrollar mi
             carrera como productor de música electrónica. Esa experiencia de vida, tan
             enriquecedora, expandió no sólo mi mirada sobre la música, sino también sobre la
             creatividad en general.
           </p>
 
-          <p className="text-secondaryLight/90 text-lg leading-relaxed md:text-xl">
+          <p className="text-secondaryLight text-lg leading-relaxed md:text-xl">
             Al regresar a Argentina, sentí la necesidad de unir dos mundos que me apasionaban: la
             música electrónica y la música orquestal. Esta fusión de lo orgánico y lo sintético
             definió mi estilo como compositor y me abrió las puertas a nuevos desafíos, como la
@@ -47,7 +47,7 @@ export default function AboutUsSection() {
             combiné instrumentos clásicos, sintetizadores y matices de la música nativa argentina.
           </p>
 
-          <p className="text-secondaryLight/90 text-lg leading-relaxed md:text-xl">
+          <p className="text-secondaryLight text-lg leading-relaxed md:text-xl">
             En el ámbito de la música electrónica, soy conocido como <strong>J. Koen</strong>,
             nombre bajo el cual he firmado tracks en sellos icónicos como Nervous Records y Nite
             Grooves, entre otros. Mi sonido actual toma influencias del house, el jazz, el funk, el

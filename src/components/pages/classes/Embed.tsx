@@ -14,7 +14,7 @@ interface PayhipEmbedProps {
   dataKey: string;
 }
 
-export const PayhipEmbed = ({ dataKey }: PayhipEmbedProps) => {
+export const PayhipEmbedClasses = ({ dataKey }: PayhipEmbedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const PayhipEmbed = ({ dataKey }: PayhipEmbedProps) => {
 
   return (
     <div ref={containerRef} className="payhip-embed-page" data-key={dataKey}>
-      <p>Cargando sample packs...</p>
+      <p>Cargando clases 1 a 1 ...</p>
     </div>
   );
 };

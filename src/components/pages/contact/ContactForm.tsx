@@ -11,8 +11,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { uploadContactForm } from '@/functions/form/UploadContactForm';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 const formSchema = z.object({
@@ -40,15 +42,23 @@ export const ContactForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await uploadContactForm(values);
+      toast.success('Formulario enviado correctamente');
+      form.reset();
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      toast.error('Error al enviar el formulario. Por favor, intenta nuevamente.');
+      return;
+    }
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-secondaryBg w-full max-w-[500px] space-y-8 rounded-2xl p-8 text-white shadow-lg"
+        className="bg-secondaryBg mx-auto w-full max-w-[500px] space-y-6 rounded-2xl p-6 text-white shadow-lg sm:space-y-8 sm:p-8"
       >
         <FormField
           control={form.control}
@@ -101,7 +111,9 @@ export const ContactForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Enviar</Button>
+        <Button type="submit" className="w-full sm:w-auto">
+          Enviar
+        </Button>
       </form>
     </Form>
   );
