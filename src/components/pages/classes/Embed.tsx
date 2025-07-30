@@ -1,7 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
-
 declare global {
   interface Window {
     PayhipEmbed?: {
@@ -14,7 +12,7 @@ interface PayhipEmbedProps {
   dataKey: string;
 }
 
-export const PayhipEmbedClasses = ({ dataKey }: PayhipEmbedProps) => {
+export const PayhipEmbedClasses = ({}: PayhipEmbedProps) => {
   // const containerRef = useRef<HTMLDivElement>(null);
 
   // useEffect(() => {
