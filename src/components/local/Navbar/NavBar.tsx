@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import Admin from './Admin';
 import LogButtons from './LogButtons';
 import { LogoutButton } from './LogOutButton';
 import { MobileNavbar } from './MobileNavbar';
@@ -28,6 +29,7 @@ const NavBar: React.FC = () => {
 
   const isHome = pathname === '/';
   const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
+  const isUserAdmin = useAuthStore(state => state.isAdmin);
 
   return (
     <nav
@@ -49,6 +51,7 @@ const NavBar: React.FC = () => {
       </div>
       <NavbarMenu />
       <MobileNavbar />
+      {isUserAdmin && <Admin />}
       {isUserLoggedIn ? <LogoutButton /> : <LogButtons />}
     </nav>
   );

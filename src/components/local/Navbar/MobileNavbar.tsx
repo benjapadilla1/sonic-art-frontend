@@ -5,16 +5,24 @@ import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Menu } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import LogButtons from './LogButtons';
 import { LogoutButton } from './LogOutButton';
 
 export const MobileNavbar = () => {
   const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleNavigate = (href: string) => {
+    setOpen(false);
+    router.push(href);
+  };
 
   return (
     <div className="lg:hidden">
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild className="flex items-center justify-center">
           <Button variant="ghost" size="icon" className="text-ctas">
             <Menu className="size-9" />
@@ -22,34 +30,43 @@ export const MobileNavbar = () => {
         </SheetTrigger>
         <SheetContent side="left" className="bg-secondaryLight w-[250px]">
           <nav className="mt-8 ml-4 flex flex-col gap-4">
-            <Link href="/" className="text-secondaryBlack text-lg font-medium hover:underline">
+            <button
+              onClick={() => handleNavigate('/')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
+            >
               Inicio
-            </Link>
-            <Link
-              href="/cursos"
-              className="text-secondaryBlack text-lg font-medium hover:underline"
+            </button>
+            <button
+              onClick={() => handleNavigate('/sobre-nosotros')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
+            >
+              Sobre Nosotros
+            </button>
+            <button
+              onClick={() => handleNavigate('/cursos')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
             >
               Cursos
-            </Link>
-            <Link
-              href="/sample-packs"
-              className="text-secondaryBlack text-lg font-medium hover:underline"
+            </button>
+            <button
+              onClick={() => handleNavigate('/sample-packs')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
             >
               Sample Packs
-            </Link>
-            <Link
-              href="/mentoria-1a1"
-              className="text-secondaryBlack text-lg font-medium hover:underline"
+            </button>
+            <button
+              onClick={() => handleNavigate('/mentoria-1a1')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
             >
               Mentoría 1 a 1
-            </Link>
-            <Link
-              href="/contacto"
-              className="text-secondaryBlack text-lg font-medium hover:underline"
+            </button>
+            <button
+              onClick={() => handleNavigate('/contacto')}
+              className="text-secondaryBlack text-left text-lg font-medium hover:underline"
             >
               Contacto
-            </Link>
-            <Separator className="size-1" />
+            </button>
+            <Separator className="bg-ctas" />
             {isUserLoggedIn ? <LogoutButton isMobile /> : <LogButtons isMobile />}
           </nav>
         </SheetContent>

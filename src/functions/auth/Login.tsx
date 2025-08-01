@@ -15,6 +15,6 @@ export async function login({ email, password }: LogObject) {
 
   const { token } = await res.json();
   localStorage.setItem('auth_token', token);
-  toast.success('Registro exitoso 🎉', { autoClose: 2000 });
+  toast.success('Inicio de sesión exitoso', { autoClose: 2000 });
   loginFunction(token);
 }

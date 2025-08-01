@@ -18,7 +18,7 @@ export const LogoutButton = ({ isMobile }: LogoutButtonProps) => {
     <Button
       onClick={() => {
         logout();
-        toast.info('Sesión cerrada 👋');
+        toast.info('Sesión cerrada');
         router.push('/');
       }}
       className={cn(isMobile ? 'relative mr-4' : 'hidden lg:flex')}

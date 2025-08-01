@@ -37,7 +37,7 @@ export default function Methodology() {
   ];
 
   return (
-    <Section className="bg-secondaryBg flex flex-col items-center gap-20 rounded-none !px-0 py-16">
+    <Section className="bg-secondaryBg flex flex-col items-center gap-20 rounded-none px-4 py-16 sm:px-6 md:px-8">
       <motion.h2
         className="font-engravers text-backgroundLight text-center text-4xl font-bold tracking-widest uppercase md:text-5xl"
         initial={{ opacity: 0, y: -20 }}
@@ -47,30 +47,26 @@ export default function Methodology() {
         Nuestra Metodología
       </motion.h2>
 
-      <div className="flex w-full items-stretch justify-center gap-8 overflow-x-auto px-4 md:px-8">
+      <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map(step => (
-          <div
-            className="group flex max-h-[600px] w-full max-w-[350px] flex-col items-center justify-center gap-2 transition-all duration-500"
+          <motion.div
             key={step.id}
+            className="group bg-totallyBlack flex flex-col items-center justify-start rounded-lg p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.div
-              className="bg-totallyBlack size-full rounded-lg p-8 group-hover:-translate-y-1 group-hover:shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="relative mb-6 h-56 w-full overflow-hidden rounded-lg group-hover:-translate-y-1">
-                <Image
-                  src={step.image}
-                  alt={step.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <h3 className="text-backgroundLight text-center text-2xl font-bold">{step.title}</h3>
-              <p className="text-backgroundLight flex-1 text-center">{step.description}</p>
-            </motion.div>
-          </div>
+            <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-lg">
+              <Image
+                src={step.image}
+                alt={step.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <h3 className="text-backgroundLight text-center text-xl font-bold">{step.title}</h3>
+            <p className="text-backgroundLight mt-2 text-center text-sm">{step.description}</p>
+          </motion.div>
         ))}
       </div>
     </Section>
