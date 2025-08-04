@@ -20,7 +20,7 @@ const columns: ColumnDef<User>[] = [
     accessorKey: 'isAdmin',
     header: 'Rol',
     cell: ({ row }) => {
-      const role = row.original.isAdmin ? 'admin' : 'user';
+      const role = row.original.isAdmin ? 'admin' : 'Usuario';
       return <span className="capitalize">{role}</span>;
     },
   },

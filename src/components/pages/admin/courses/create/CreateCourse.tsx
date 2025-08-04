@@ -1,0 +1,239 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Chapter, Module } from '@/types/firestore';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { VideoUploader } from '../VideoUploader';
+
+export const CreateCourse = () => {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    price: '',
+    duration: '',
+    modules: [] as Module[],
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleModuleChange = (index: number, field: keyof Module, value: string) => {
+    const updatedModules = [...formData.modules];
+    updatedModules[index] = {
+      ...updatedModules[index],
+      [field]: value,
+    };
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
+  const handleChapterChange = (
+    moduleIndex: number,
+    chapterIndex: number,
+    field: keyof Chapter,
+    value: string
+  ) => {
+    const updatedModules = [...formData.modules];
+    const updatedChapters = [...(updatedModules[moduleIndex].chapters || [])];
+    updatedChapters[chapterIndex] = {
+      ...updatedChapters[chapterIndex],
+      [field]: value,
+    };
+    updatedModules[moduleIndex].chapters = updatedChapters;
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
+  const addModule = () => {
+    setFormData({
+      ...formData,
+      modules: [
+        ...formData.modules,
+        {
+          title: '',
+          description: '',
+          order: formData.modules.length + 1,
+          chapters: [],
+        },
+      ],
+    });
+  };
+
+  const removeModule = (index: number) => {
+    const updatedModules = formData.modules.filter((_, i) => i !== index);
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
+  const addChapter = (moduleIndex: number) => {
+    const updatedModules = [...formData.modules];
+    const chapters = updatedModules[moduleIndex].chapters || [];
+    chapters.push({
+      title: '',
+      description: '',
+      videoUrl: '',
+    });
+    updatedModules[moduleIndex].chapters = chapters;
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
+  const removeChapter = (moduleIndex: number, chapterIndex: number) => {
+    const updatedModules = [...formData.modules];
+    const updatedChapters =
+      updatedModules[moduleIndex].chapters?.filter((_, i) => i !== chapterIndex) || [];
+    updatedModules[moduleIndex].chapters = updatedChapters;
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
+  const handleCreateCourse = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error('Error al crear curso');
+
+      router.push('/admin');
+      toast.success('Curso creado correctamente');
+    } catch (err) {
+      console.error('Error al crear curso:', err);
+      toast.error('Hubo un error al crear el curso');
+    }
+  };
+
+  return (
+    <div className="mx-auto mt-8 max-w-xl space-y-6 rounded-lg bg-white p-6 shadow-md">
+      <h1 className="text-2xl font-semibold">Crear nuevo curso</h1>
+
+      <form onSubmit={handleCreateCourse} className="space-y-4">
+        <div>
+          <Label htmlFor="title">Título</Label>
+          <Input id="title" name="title" value={formData.title} onChange={handleInputChange} />
+        </div>
+
+        <div>
+          <Label htmlFor="description">Descripción</Label>
+          <Textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="price">Precio</Label>
+          <Input id="price" name="price" value={formData.price} onChange={handleInputChange} />
+        </div>
+
+        <div>
+          <Label htmlFor="duration">Duración (hs)</Label>
+          <Input
+            id="duration"
+            name="duration"
+            value={formData.duration}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold">Módulos</h2>
+
+          {formData.modules.map((mod, modIdx) => (
+            <div key={modIdx} className="space-y-3 rounded-md border bg-gray-50 p-4">
+              <div>
+                <Label>Título del módulo</Label>
+                <Input
+                  value={mod.title}
+                  onChange={e => handleModuleChange(modIdx, 'title', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <Label>Descripción del módulo</Label>
+                <Textarea
+                  value={mod.description}
+                  onChange={e => handleModuleChange(modIdx, 'description', e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-3 rounded-md border bg-white p-3">
+                <h3 className="text-sm font-bold">Capítulos</h3>
+                {(mod.chapters || []).map((chapter, chapIdx) => (
+                  <div key={chapIdx} className="space-y-2 border-t pt-2">
+                    <p>Capítulo {chapIdx + 1}</p>
+                    <div>
+                      <Label>Título</Label>
+                      <Input
+                        value={chapter.title}
+                        onChange={e =>
+                          handleChapterChange(modIdx, chapIdx, 'title', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <Label>Descripción</Label>
+                      <Textarea
+                        value={chapter.description}
+                        onChange={e =>
+                          handleChapterChange(modIdx, chapIdx, 'description', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <Label>Video URL</Label>
+                      <VideoUploader />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => removeChapter(modIdx, chapIdx)}
+                    >
+                      Eliminar capítulo
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => addChapter(modIdx)}
+                >
+                  Añadir capítulo
+                </Button>
+              </div>
+
+              <Button
+                type="button"
+                variant="destructive"
+                size="sm"
+                onClick={() => removeModule(modIdx)}
+              >
+                Eliminar módulo
+              </Button>
+            </div>
+          ))}
+
+          <Button type="button" onClick={addModule}>
+            Añadir módulo
+          </Button>
+        </div>
+
+        <div className="pt-4 text-right">
+          <Button type="submit" className="bg-black text-white hover:bg-gray-900">
+            Crear curso
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};

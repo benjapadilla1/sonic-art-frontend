@@ -1,4 +1,4 @@
-import { CreateCourse } from '@/components/pages/admin/courses/CreateCourse';
+import { CreateSamplePack } from '@/components/pages/admin/samplePacks/CreateSamplePack';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -8,7 +8,7 @@ const page = () => {
       <Link className="p-6" href={`/admin`}>
         <Button variant="outline">Volver</Button>
       </Link>
-      <CreateCourse />
+      <CreateSamplePack />
     </div>
   );
 };

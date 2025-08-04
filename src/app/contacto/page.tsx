@@ -2,6 +2,8 @@ import { ContactForm } from '@/components/pages/contact/ContactForm';
 import Section from '@/components/ui/section';
 import Image from 'next/image';
 
+// TODO: Cambiar a componente
+
 const page = () => {
   return (
     <Section className="grid min-h-screen grid-cols-1 py-20 md:grid-cols-2">

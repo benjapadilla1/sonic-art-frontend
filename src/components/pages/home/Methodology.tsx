@@ -64,8 +64,10 @@ export default function Methodology() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <h3 className="text-backgroundLight text-center text-xl font-bold">{step.title}</h3>
-            <p className="text-backgroundLight mt-2 text-center text-sm">{step.description}</p>
+            <h3 className="text-backgroundLight font-engravers text-center text-xl font-bold">
+              {step.title}
+            </h3>
+            <p className="text-backgroundLight mt-2 text-center">{step.description}</p>
           </motion.div>
         ))}
       </div>

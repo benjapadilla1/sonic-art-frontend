@@ -9,21 +9,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Course } from '@/types/firestore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-interface Course {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  duration: number;
-}
+import { toast } from 'react-toastify';
 
 export const CoursesCard = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const fetchCourses = async () => {
     try {
@@ -51,16 +54,21 @@ export const CoursesCard = () => {
       if (!res.ok) throw new Error('Error al eliminar curso');
 
       fetchCourses();
+      toast.success('Curso eliminado correctamente');
     } catch (err) {
       console.error('Error al eliminar curso:', err);
+      toast.error('Error al eliminar curso');
+    } finally {
+      setOpenDialog(false);
+      setSelectedCourseId(null);
     }
   };
 
   return (
     <div className="p-4">
-      <div className="mb-4 flex items-center justify-around">
-        <h2 className="text-2xl font-bold">Cursos</h2>
-        <Link href={`/admin/courses/create`}>
+      <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
+        <h2 className="font-engravers text-2xl font-bold">Cursos</h2>
+        <Link href={`/admin/cursos/crear`}>
           <Button>Crear Curso</Button>
         </Link>
       </div>
@@ -90,13 +98,16 @@ export const CoursesCard = () => {
                 </p>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Link href={`/admin/courses/${course.id}`}>
+                <Link href={`/admin/cursos/${course.id}`}>
                   <Button variant="outline" size="sm">
                     Editar
                   </Button>
                 </Link>
                 <Button
-                  onClick={() => handleDeleteCourse(course.id)}
+                  onClick={() => {
+                    setSelectedCourseId(course.id);
+                    setOpenDialog(true);
+                  }}
                   variant="destructive"
                   size="sm"
                 >
@@ -105,6 +116,25 @@ export const CoursesCard = () => {
               </CardFooter>
             </Card>
           ))}
+          <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+            <DialogContent className="bg-secondaryLight flex flex-col gap-3">
+              <DialogHeader>
+                <DialogTitle>¿Estás seguro que querés eliminar este curso?</DialogTitle>
+              </DialogHeader>
+              <p className="pl-2 text-sm">Esta acción no se puede deshacer.</p>
+              <DialogFooter>
+                <Button className="bg-white" variant="outline" onClick={() => setOpenDialog(false)}>
+                  Cancelar
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => selectedCourseId && handleDeleteCourse(selectedCourseId)}
+                >
+                  Eliminar
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       )}
     </div>

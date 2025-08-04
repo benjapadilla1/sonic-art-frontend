@@ -1,6 +1,6 @@
 'use client';
 
-import { EditCourse } from '@/components/pages/admin/courses/EditCourse';
+import { EditCourse } from '@/components/pages/admin/courses/edit/EditCourse';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
