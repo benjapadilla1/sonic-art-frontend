@@ -77,6 +77,7 @@ export const CreateCourse = () => {
       title: '',
       description: '',
       videoUrl: '',
+      order: chapters.length + 1,
     });
     updatedModules[moduleIndex].chapters = chapters;
     setFormData({ ...formData, modules: updatedModules });
