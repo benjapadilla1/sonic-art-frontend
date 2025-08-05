@@ -18,8 +18,21 @@ export const CreateCourse = () => {
     description: '',
     price: '',
     duration: '',
+    coverImageUrl: '',
     modules: [] as Module[],
   });
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, coverImageUrl: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -130,19 +143,24 @@ export const CreateCourse = () => {
           />
         </div>
 
-        <div>
-          <Label htmlFor="price">Precio</Label>
-          <Input id="price" name="price" value={formData.price} onChange={handleInputChange} />
+        <div className="flex flex-row gap-4">
+          <div className="w-full">
+            <Label htmlFor="price">Precio</Label>
+            <Input id="price" name="price" value={formData.price} onChange={handleInputChange} />
+          </div>
+          <div className="w-full">
+            <Label htmlFor="duration">Duración (hs)</Label>
+            <Input
+              id="duration"
+              name="duration"
+              value={formData.duration}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
-
-        <div>
-          <Label htmlFor="duration">Duración (hs)</Label>
-          <Input
-            id="duration"
-            name="duration"
-            value={formData.duration}
-            onChange={handleInputChange}
-          />
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="image">Imagen del curso</Label>
+          <Input id="image" type="file" accept="image/*" onChange={e => handleImageChange(e)} />
         </div>
 
         <div className="space-y-4">

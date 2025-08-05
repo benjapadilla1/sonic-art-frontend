@@ -87,7 +87,7 @@ export const CoursesCard = () => {
               key={course.id}
               className="flex flex-col shadow-lg transition-shadow duration-300 hover:shadow-xl"
             >
-              {course.coverImageUrl && (
+              {course.coverImageUrl ? (
                 <div className="relative -mt-6 h-64 w-full">
                   <Image
                     src={course.coverImageUrl}
@@ -96,6 +96,8 @@ export const CoursesCard = () => {
                     className="rounded-t-lg object-cover"
                   />
                 </div>
+              ) : (
+                <Skeleton className="-mt-6 h-64 w-full rounded-xl" />
               )}
 
               <CardHeader className="flex flex-col gap-1 px-4 pt-4">
