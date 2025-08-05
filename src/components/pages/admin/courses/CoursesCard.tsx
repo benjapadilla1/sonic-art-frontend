@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Course } from '@/types/firestore';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -82,14 +83,29 @@ export const CoursesCard = () => {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {courses.map(course => (
-            <Card key={course.id}>
-              <CardHeader>
-                <CardTitle>{course.title}</CardTitle>
-                <CardDescription className="text-muted-foreground line-clamp-2 text-sm">
+            <Card
+              key={course.id}
+              className="flex flex-col shadow-lg transition-shadow duration-300 hover:shadow-xl"
+            >
+              {course.coverImageUrl && (
+                <div className="relative -mt-6 h-64 w-full">
+                  <Image
+                    src={course.coverImageUrl}
+                    alt={`Portada del curso ${course.title}`}
+                    fill
+                    className="rounded-t-lg object-cover"
+                  />
+                </div>
+              )}
+
+              <CardHeader className="flex flex-col gap-1 px-4 pt-4">
+                <CardTitle className="text-lg font-semibold">{course.title}</CardTitle>
+                <CardDescription className="text-muted-foreground line-clamp-3 text-sm">
                   {course.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+
+              <CardContent className="flex-grow space-y-1 px-4 pt-2 pb-4">
                 <p className="text-muted-foreground text-sm">
                   <strong>Precio:</strong> ${course.price}
                 </p>
@@ -97,7 +113,8 @@ export const CoursesCard = () => {
                   <strong>Duración:</strong> {course.duration} hs
                 </p>
               </CardContent>
-              <CardFooter className="flex justify-between">
+
+              <CardFooter className="flex items-center justify-between px-4 pt-2 pb-4">
                 <Link href={`/admin/cursos/${course.id}`}>
                   <Button variant="outline" size="sm">
                     Editar
@@ -116,6 +133,7 @@ export const CoursesCard = () => {
               </CardFooter>
             </Card>
           ))}
+
           <Dialog open={openDialog} onOpenChange={setOpenDialog}>
             <DialogContent className="bg-secondaryLight flex flex-col gap-3">
               <DialogHeader>

@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Course } from '@/types/firestore';
+import Image from 'next/image';
 
 interface CourseDescriptionProps {
   course: Course;
@@ -10,6 +11,18 @@ interface CourseDescriptionProps {
 }
 
 const CourseDescription = ({ course, setCourse }: CourseDescriptionProps) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCourse(prev => (prev ? { ...prev, coverImageUrl: reader.result as string } : null));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Card className="shadow-sm">
       <CardHeader>
@@ -56,6 +69,24 @@ const CourseDescription = ({ course, setCourse }: CourseDescriptionProps) => {
               onChange={e => setCourse({ ...course, duration: e.target.value })}
               placeholder="Ej: 10"
             />
+          </div>
+
+          <div className="flex space-y-1">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="image">Imagen del curso</Label>
+              <Input id="image" type="file" accept="image/*" onChange={e => handleImageChange(e)} />
+            </div>
+
+            {course.coverImageUrl && (
+              <div className="relative h-40 w-full">
+                <Image
+                  fill
+                  src={course.coverImageUrl}
+                  alt="Vista previa del curso"
+                  className="mt-2 rounded-md border object-cover shadow-sm"
+                />
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

@@ -30,6 +30,7 @@ export interface Course {
   price: string;
   duration: string;
   category?: string;
+  coverImageUrl?: string;
   modules: Module[];
   createdAt: string;
   updatedAt?: string;
