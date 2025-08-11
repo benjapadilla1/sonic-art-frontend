@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Instagram, Youtube } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -32,26 +32,37 @@ export const Footer = () => {
           <span className="text-sm font-medium">Seguinos</span>
           <div className="flex items-center gap-3">
             <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/sonicart.lab/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
             </Button>
             <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Facebook className="h-5 w-5" />
-              </a>
-            </Button>
-            <Button className="hover:bg-ctas" variant="ghost" size="icon" asChild>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <Twitter className="h-5 w-5" />
+              <a
+                href="https://www.youtube.com/channel/UCRTidIvv5e1JXhE0O5Mfl7Q"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Youtube className="h-5 w-5" />
               </a>
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="text-muted-foreground mt-10 border-t pt-6 text-center text-xs">
+      <div className="text-muted-foreground mt-10 flex flex-col gap-4 border-t pt-6 text-center text-xs">
         © {new Date().getFullYear()} Sonic Art. Todos los derechos reservados.
+        <div className="flex items-center justify-center gap-2">
+          <Link href="/politica-de-privacidad" className="hover:underline">
+            Política de Privacidad
+          </Link>
+          <Link href="/terminos-y-condiciones" className="hover:underline">
+            Términos y Condiciones
+          </Link>
+        </div>
       </div>
     </footer>
   );

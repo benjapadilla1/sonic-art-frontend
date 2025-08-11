@@ -76,7 +76,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
       if (!res.ok) throw new Error('Error al actualizar Sample Pack');
       toast.success('Sample Pack actualizado correctamente');
-      router.push('/admin/samplepacks');
+      router.push('/admin');
     } catch (err) {
       console.error(err);
       toast.error('No se pudo actualizar el Sample Pack');

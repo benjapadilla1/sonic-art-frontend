@@ -3,8 +3,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { dataURLtoFile } from '@/functions/cloud/DataURLToFile';
 import { Chapter, Module } from '@/types/firestore';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -51,7 +54,7 @@ export const CreateCourse = () => {
     moduleIndex: number,
     chapterIndex: number,
     field: keyof Chapter,
-    value: string
+    value: string | File
   ) => {
     const updatedModules = [...formData.modules];
     const updatedChapters = [...(updatedModules[moduleIndex].chapters || [])];
@@ -106,11 +109,50 @@ export const CreateCourse = () => {
 
   const handleCreateCourse = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const form = new FormData();
+
+    form.append('title', formData.title);
+    form.append('description', formData.description);
+    form.append('price', formData.price);
+    form.append('duration', formData.duration);
+
+    // Imagen
+    if (formData.coverImageUrl) {
+      const imageFile = dataURLtoFile(formData.coverImageUrl, 'cover.jpg');
+      form.append('coverImage', imageFile);
+    }
+
+    form.append(
+      'modules',
+      JSON.stringify(
+        formData.modules.map((module, modIdx) => ({
+          ...module,
+          chapters: module.chapters?.map((ch, chapIdx) => {
+            const fieldName = `video-${modIdx}-${chapIdx}`;
+            return {
+              ...ch,
+              videoUrl: fieldName,
+            };
+          }),
+        }))
+      )
+    );
+
+    // Archivos de video
+    formData.modules.forEach((mod, modIdx) => {
+      mod.chapters?.forEach((ch, chapIdx) => {
+        const fieldName = `video-${modIdx}-${chapIdx}`;
+        if (ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl) {
+          form.append(fieldName, ch.videoUrl as File);
+        }
+      });
+    });
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: form,
       });
 
       if (!res.ok) throw new Error('Error al crear curso');
@@ -160,14 +202,29 @@ export const CreateCourse = () => {
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="image">Imagen del curso</Label>
-          <Input id="image" type="file" accept="image/*" onChange={e => handleImageChange(e)} />
+          <Input
+            id="image"
+            className="file:px-2"
+            type="file"
+            accept="image/*"
+            onChange={e => handleImageChange(e)}
+          />
+          {formData.coverImageUrl && (
+            <Image
+              src={formData.coverImageUrl}
+              alt="Cover Image"
+              width={200}
+              height={200}
+              className="mt-2 rounded-md border"
+            />
+          )}
         </div>
 
         <div className="space-y-4">
           <h2 className="text-lg font-bold">Módulos</h2>
 
           {formData.modules.map((mod, modIdx) => (
-            <div key={modIdx} className="space-y-3 rounded-md border bg-gray-50 p-4">
+            <div key={modIdx} className="space-y-3 rounded-md border p-4">
               <div>
                 <Label>Título del módulo</Label>
                 <Input
@@ -207,9 +264,11 @@ export const CreateCourse = () => {
                         }
                       />
                     </div>
-                    <div>
-                      <Label>Video URL</Label>
-                      <VideoUploader />
+                    <div className="flex flex-col gap-2">
+                      <Label>Video del capítulo:</Label>
+                      <VideoUploader
+                        setFile={file => handleChapterChange(modIdx, chapIdx, 'videoUrl', file)}
+                      />
                     </div>
                     <Button
                       type="button"
@@ -219,6 +278,7 @@ export const CreateCourse = () => {
                     >
                       Eliminar capítulo
                     </Button>
+                    <Separator />
                   </div>
                 ))}
                 <Button

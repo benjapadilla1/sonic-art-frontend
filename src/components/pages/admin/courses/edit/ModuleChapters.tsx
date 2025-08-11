@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Chapter, Course, Module } from '@/types/firestore';
+import { VideoUploader } from '../VideoUploader';
 
 interface Props {
   course: Course | null;
@@ -23,7 +24,7 @@ export const ModuleChapters = ({ idx, course, setCourse, mod, moveItem }: Props)
     moduleIndex: number,
     chapterIndex: number,
     field: keyof Chapter,
-    value: string
+    value: string | File
   ) => {
     if (!course) return;
     const updatedModules = [...course.modules];
@@ -117,11 +118,10 @@ export const ModuleChapters = ({ idx, course, setCourse, mod, moveItem }: Props)
               </div>
 
               <div className="space-y-2">
-                <Label>Video (URL)</Label>
-                <Input
-                  value={ch.videoUrl}
-                  onChange={e => handleChapterChange(idx, chIdx, 'videoUrl', e.target.value)}
-                  placeholder="https://..."
+                <Label>Video</Label>
+                <VideoUploader
+                  previewUrl={ch.videoUrl}
+                  setFile={file => handleChapterChange(idx, chIdx, 'videoUrl', file)}
                 />
               </div>
 

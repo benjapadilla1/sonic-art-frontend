@@ -11,7 +11,7 @@ export interface Chapter {
   title: string;
   description: string;
   comments?: Comment[];
-  videoUrl: string;
+  videoUrl?: string | null;
   order: number;
 }
 

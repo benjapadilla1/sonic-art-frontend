@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { dataURLtoFile } from '@/functions/cloud/DataURLToFile';
 import { Course } from '@/types/firestore';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -32,11 +33,24 @@ export const EditCourse = ({ id }: EditCourseProps) => {
   }, [id]);
 
   const saveChanges = async () => {
+    const form = new FormData();
+
+    if (course) {
+      form.append('title', course.title);
+      form.append('description', course.description);
+      form.append('price', course.price.toString());
+      form.append('duration', course.duration.toString());
+    }
+
+    if (course?.coverImageUrl) {
+      const imageFile = dataURLtoFile(course.coverImageUrl, 'cover.jpg');
+      form.append('coverImageUrl', imageFile);
+    }
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(course),
+        body: form,
       });
       if (!res.ok) throw new Error('Error al actualizar el curso');
       toast.success('Curso actualizado con éxito');
