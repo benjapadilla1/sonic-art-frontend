@@ -24,7 +24,7 @@ const TermsAndConditions = () => {
             <strong>Pagos y Seguridad</strong>
           </p>
           <p>
-            Los pagos en nuestra plataforma son gestionados a través de Paddle, utilizando los
+            Los pagos en nuestra plataforma son gestionados a través de PayPal, utilizando los
             últimos métodos de seguridad online disponibles para proteger tu información personal y
             financiera.
           </p>

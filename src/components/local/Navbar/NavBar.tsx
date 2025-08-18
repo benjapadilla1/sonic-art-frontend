@@ -14,6 +14,7 @@ import { NavbarMenu } from './NavDropdown';
 
 const NavBar: React.FC = () => {
   const [isTop, setIsTop] = useState(true);
+  const { fetchAdminStatus, isAdmin } = useAuthStore();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -27,9 +28,12 @@ const NavBar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
+  useEffect(() => {
+    fetchAdminStatus();
+  }, [fetchAdminStatus]);
+
   const isHome = pathname === '/';
   const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
-  const isUserAdmin = useAuthStore(state => state.isAdmin);
 
   return (
     <nav
@@ -51,7 +55,7 @@ const NavBar: React.FC = () => {
       </div>
       <NavbarMenu />
       <MobileNavbar />
-      {isUserAdmin && <Admin />}
+      {isAdmin && <Admin />}
       {isUserLoggedIn ? <LogoutButton /> : <LogButtons />}
     </nav>
   );

@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-export const classesFAQs = [
+const classesFAQs = [
   {
     question: '¿Cómo reservo una clase de producción musical online?',
     answer:
@@ -50,11 +50,11 @@ export const classesFAQs = [
 
 export function FAQs() {
   return (
-    <div className="bg-secondaryBg w-screen p-20">
+    <div className="bg-secondaryBg w-full p-20">
       <h1 className="font-engravers text-backgroundLight mb-10 text-center text-3xl font-bold">
         Preguntas Frecuentes
       </h1>
-      <Accordion type="multiple" className="mx-auto w-full max-w-2xl">
+      <Accordion type="multiple" className="mx-auto w-full max-w-3xl">
         {classesFAQs.map((faq, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
             <AccordionTrigger className="text-backgroundLight text-lg">

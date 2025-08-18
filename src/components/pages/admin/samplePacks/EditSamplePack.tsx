@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -24,6 +25,10 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
     zipUrl: '',
     price: '',
   });
+
+  const [newCoverImage, setNewCoverImage] = useState<File | null>(null);
+  const [newPreviews, setNewPreviews] = useState<(File | null)[]>([null, null]);
+  const [newZipFile, setNewZipFile] = useState<File | null>(null);
 
   useEffect(() => {
     const fetchSamplePack = async () => {
@@ -50,7 +55,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
     if (id) fetchSamplePack();
   }, [id]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith('preview-')) {
@@ -63,15 +68,40 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
     }
   };
 
+  const handleFileChange = (field: string, file: File | null, index?: number) => {
+    if (field === 'coverImage') {
+      setNewCoverImage(file);
+    } else if (field === 'zipFile') {
+      setNewZipFile(file);
+    } else if (field === 'preview' && typeof index === 'number') {
+      const updated = [...newPreviews];
+      updated[index] = file;
+      setNewPreviews(updated);
+    }
+  };
+
   const handleUpdate = async () => {
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('price', formData.price);
+
+      if (newCoverImage) {
+        formDataToSend.append('coverImage', newCoverImage);
+      }
+      if (newZipFile) {
+        formDataToSend.append('zipFile', newZipFile);
+      }
+      newPreviews.forEach((file, idx) => {
+        if (file) {
+          formDataToSend.append(`preview${idx + 1}`, file);
+        }
+      });
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/samplepacks/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          price: Number(formData.price),
-        }),
+        body: formDataToSend,
       });
 
       if (!res.ok) throw new Error('Error al actualizar Sample Pack');
@@ -91,7 +121,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
       <div className="space-y-2">
         <Label htmlFor="title">Título</Label>
-        <Input id="title" name="title" value={formData.title} onChange={handleInputChange} />
+        <Input id="title" name="title" value={formData.title} onChange={handleTextChange} />
       </div>
 
       <div className="space-y-2">
@@ -100,44 +130,67 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
           id="description"
           name="description"
           value={formData.description}
-          onChange={handleInputChange}
+          onChange={handleTextChange}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="imageUrl">URL de Imagen</Label>
+        <Label>Imagen actual</Label>
+        {formData.imageUrl && (
+          <Image
+            fill
+            src={formData.imageUrl}
+            alt="Cover"
+            className="h-32 w-auto rounded object-cover"
+          />
+        )}
         <Input
-          id="imageUrl"
-          name="imageUrl"
-          value={formData.imageUrl}
-          onChange={handleInputChange}
+          type="file"
+          accept="image/*"
+          onChange={e => handleFileChange('coverImage', e.target.files?.[0] || null)}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>Previews</Label>
-        <Input
-          name="preview-0"
-          placeholder="URL de preview 1"
-          value={formData.previewUrls[0]}
-          onChange={handleInputChange}
-        />
-        <Input
-          name="preview-1"
-          placeholder="URL de preview 2"
-          value={formData.previewUrls[1]}
-          onChange={handleInputChange}
-        />
+        <Label>Previews actuales</Label>
+        {formData.previewUrls.map((url, idx) => (
+          <div key={idx} className="space-y-1">
+            {url && (
+              <audio controls src={url} className="w-full">
+                Tu navegador no soporta audio.
+              </audio>
+            )}
+            <Input
+              type="file"
+              accept="audio/*"
+              onChange={e => handleFileChange('preview', e.target.files?.[0] || null, idx)}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="zipUrl">URL del ZIP</Label>
-        <Input id="zipUrl" name="zipUrl" value={formData.zipUrl} onChange={handleInputChange} />
+        <Label>Archivo ZIP actual</Label>
+        {formData.zipUrl && (
+          <a
+            href={formData.zipUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Descargar ZIP
+          </a>
+        )}
+        <Input
+          type="file"
+          accept=".zip"
+          onChange={e => handleFileChange('zipFile', e.target.files?.[0] || null)}
+        />
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="price">Precio</Label>
-        <Input id="price" name="price" value={formData.price} onChange={handleInputChange} />
+        <Input id="price" name="price" value={formData.price} onChange={handleTextChange} />
       </div>
 
       <div className="pt-4">

@@ -6,20 +6,32 @@ interface AuthState {
   login: (token: string) => void;
   logout: () => void;
   isAdmin?: boolean;
+  fetchAdminStatus: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>(set => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   token: typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null,
   isLoggedIn: typeof window !== 'undefined' ? !!localStorage.getItem('auth_token') : false,
-  isAdmin: typeof window !== 'undefined' ? localStorage.getItem('is_admin') === 'true' : false,
+  isAdmin: false,
 
   login: (token: string) => {
     localStorage.setItem('auth_token', token);
     set({ token, isLoggedIn: true });
+    get().fetchAdminStatus();
   },
 
   logout: () => {
     localStorage.removeItem('auth_token');
     set({ token: null, isLoggedIn: false });
+  },
+
+  fetchAdminStatus: async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+      },
+    });
+    const data = await response.json();
+    set({ isAdmin: data.isAdmin });
   },
 }));

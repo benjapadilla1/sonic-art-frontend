@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
       <Separator />
 
       <CardContent className="prose prose-p:leading-relaxed max-w-none">
-        <ScrollArea className="h-[600px] pr-4">
+        <ScrollArea className="h-[600px pr-4">
           <p>
             <strong>En Sonic Art Lab</strong>, nos comprometemos a proteger la privacidad de
             nuestros usuarios. Esta política explica cómo recolectamos, utilizamos y protegemos tu
@@ -28,7 +28,7 @@ const PrivacyPolicy = () => {
             <li>Correo electrónico</li>
           </ul>
           <p>
-            Los datos de pago son procesados exclusivamente por Paddle, quienes cumplen con los
+            Los datos de pago son procesados exclusivamente por PayPal, quienes cumplen con los
             estándares de seguridad más estrictos.
           </p>
 
@@ -47,7 +47,7 @@ const PrivacyPolicy = () => {
           </p>
           <p>
             Sonic Art Lab no comparte tu información personal con ningún tercero, excepto con
-            Paddle, nuestra plataforma de pagos, para gestionar el procesamiento de pagos de manera
+            PayPal, nuestra plataforma de pagos, para gestionar el procesamiento de pagos de manera
             segura.
           </p>
 
