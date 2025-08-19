@@ -15,7 +15,7 @@ type AuthMode = 'login' | 'register';
 export interface LogObject {
   email: string;
   password: string;
-  captcha: any;
+  captcha: string | null;
 }
 
 interface AuthFormProps {
@@ -74,7 +74,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
 
         <ReCAPTCHA
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-          onChange={token => setCaptchaToken(token)}
+          onChange={(token: string) => setCaptchaToken(token)}
         />
 
         <Button type="submit" className="w-full rounded-md px-4 py-2">
