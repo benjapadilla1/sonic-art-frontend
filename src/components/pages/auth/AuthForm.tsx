@@ -35,7 +35,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!captchaToken) {
+    if (!captchaToken && mode === 'register') {
       toast.info('Por favor confirma que no sos un robot.');
       return;
     }
@@ -72,10 +72,12 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
           required
         />
 
-        <ReCAPTCHA
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-          onChange={(token: string) => setCaptchaToken(token)}
-        />
+        {mode === 'register' && (
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            onChange={(token: string) => setCaptchaToken(token)}
+          />
+        )}
 
         <Button type="submit" className="w-full rounded-md px-4 py-2">
           {mode === 'login' ? 'Entrar' : 'Registrarse'}
