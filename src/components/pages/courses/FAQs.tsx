@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-export const coursesFAQs = [
+const coursesFAQs = [
   {
     question: '¿Cómo accedo a los cursos después de comprar?',
     answer:
@@ -45,7 +45,7 @@ export const coursesFAQs = [
 
 export function FAQs() {
   return (
-    <div className="bg-secondaryBg w-screen p-20">
+    <div className="bg-secondaryBg w-full p-20">
       <h1 className="font-engravers text-backgroundLight mb-10 text-center text-3xl font-bold">
         Preguntas Frecuentes
       </h1>

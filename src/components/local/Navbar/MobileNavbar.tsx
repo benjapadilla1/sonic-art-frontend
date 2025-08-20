@@ -8,7 +8,7 @@ import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LogButtons from './LogButtons';
-import { LogoutButton } from './LogOutButton';
+import { UserProfile } from './UserProfile';
 
 export const MobileNavbar = () => {
   const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
@@ -55,7 +55,7 @@ export const MobileNavbar = () => {
               Sample Packs
             </button>
             <button
-              onClick={() => handleNavigate('/mentoria-1a1')}
+              onClick={() => handleNavigate('/clases')}
               className="text-secondaryBlack text-left text-lg font-medium hover:underline"
             >
               Mentoría 1 a 1
@@ -67,7 +67,7 @@ export const MobileNavbar = () => {
               Contacto
             </button>
             <Separator className="bg-ctas" />
-            {isUserLoggedIn ? <LogoutButton isMobile /> : <LogButtons isMobile />}
+            {isUserLoggedIn ? <UserProfile isMobile /> : <LogButtons isMobile />}
           </nav>
         </SheetContent>
       </Sheet>

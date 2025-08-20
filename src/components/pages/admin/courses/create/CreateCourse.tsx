@@ -16,6 +16,8 @@ import { VideoUploader } from '../VideoUploader';
 export const CreateCourse = () => {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -109,6 +111,7 @@ export const CreateCourse = () => {
 
   const handleCreateCourse = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const form = new FormData();
 
@@ -132,7 +135,10 @@ export const CreateCourse = () => {
             const fieldName = `video-${modIdx}-${chapIdx}`;
             return {
               ...ch,
-              videoUrl: fieldName,
+              videoUrl:
+                ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl
+                  ? fieldName
+                  : '',
             };
           }),
         }))
@@ -162,6 +168,8 @@ export const CreateCourse = () => {
     } catch (err) {
       console.error('Error al crear curso:', err);
       toast.error('Hubo un error al crear el curso');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -308,8 +316,12 @@ export const CreateCourse = () => {
         </div>
 
         <div className="pt-4 text-right">
-          <Button type="submit" className="bg-black text-white hover:bg-gray-900">
-            Crear curso
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className="bg-black text-white hover:bg-gray-900"
+          >
+            {isLoading ? 'Creando Curso...' : 'Crear Curso'}
           </Button>
         </div>
       </form>

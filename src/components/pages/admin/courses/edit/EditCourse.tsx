@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { dataURLtoFile } from '@/functions/cloud/DataURLToFile';
+import { fetchCourseById } from '@/functions/courses/fetchCourseById';
 import { Course } from '@/types/firestore';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -18,10 +19,9 @@ export const EditCourse = ({ id }: EditCourseProps) => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/${id}`);
-        if (!res.ok) throw new Error('Error al obtener el curso');
-        const data = await res.json();
-        setCourse(data);
+        const res = await fetchCourseById(id);
+
+        setCourse(res);
       } catch (err) {
         console.error(err);
       } finally {
@@ -40,6 +40,35 @@ export const EditCourse = ({ id }: EditCourseProps) => {
       form.append('description', course.description);
       form.append('price', course.price.toString());
       form.append('duration', course.duration.toString());
+
+      form.append(
+        'modules',
+        JSON.stringify(
+          course.modules.map((module, modIdx) => ({
+            ...module,
+            chapters: module.chapters?.map((ch, chapIdx) => {
+              const fieldName = `video-${modIdx}-${chapIdx}`;
+              return {
+                ...ch,
+                videoUrl:
+                  ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl
+                    ? fieldName
+                    : '',
+              };
+            }),
+          }))
+        )
+      );
+
+      // Archivos de video
+      course.modules.forEach((mod, modIdx) => {
+        mod.chapters?.forEach((ch, chapIdx) => {
+          const fieldName = `video-${modIdx}-${chapIdx}`;
+          if (ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl) {
+            form.append(fieldName, ch.videoUrl as File);
+          }
+        });
+      });
     }
 
     if (course?.coverImageUrl) {
@@ -52,6 +81,7 @@ export const EditCourse = ({ id }: EditCourseProps) => {
         method: 'PUT',
         body: form,
       });
+
       if (!res.ok) throw new Error('Error al actualizar el curso');
       toast.success('Curso actualizado con éxito');
     } catch (err) {

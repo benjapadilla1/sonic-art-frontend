@@ -1,6 +1,6 @@
 import { DiscordSection } from '@/components/pages/home/DiscordSection';
 import { Hero } from '@/components/pages/home/Hero';
-import { LastReleases } from '@/components/pages/home/LastReleases';
+// import { LastReleases } from '@/components/pages/home/LastReleases';
 import LatestVideos from '@/components/pages/home/LatestVideos';
 import Methodology from '@/components/pages/home/Methodology';
 import { StartYourJourney } from '@/components/pages/home/StartYourJourney';
@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <Methodology />
       <Testimonials />
-      <LastReleases />
+      {/* <LastReleases /> */}
       <StartYourJourney />
       <LatestVideos />
       <DiscordSection />

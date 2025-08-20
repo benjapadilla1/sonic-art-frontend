@@ -1,7 +1,7 @@
 'use client';
 
 import { CoursesCard } from '@/components/pages/admin/courses/CoursesCard';
-import { SamplePacks } from '@/components/pages/admin/samplePacks/SamplePacks';
+import { AdminSamplePacks } from '@/components/pages/admin/samplePacks/AdminSamplePacks';
 import UsersDashboard from '@/components/pages/admin/users/UsersDashboard';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,7 @@ const AdminPage = () => {
   return (
     <div className="bg-background flex min-h-screen flex-col pt-20">
       <CoursesCard />
-      <SamplePacks />
+      <AdminSamplePacks />
       <UsersDashboard />
     </div>
   );

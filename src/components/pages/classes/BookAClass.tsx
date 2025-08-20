@@ -1,15 +1,29 @@
 'use client';
 
+import { useAuthStore } from '@/stores/useAuthStore';
+import Link from 'next/link';
 import Calendar from './Calendar';
 
 const BookAClass = () => {
+  const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
+
   return (
     <div className="pt-2">
       <h1 className="font-engravers text-center text-4xl font-semibold">Clases 1 a 1</h1>
       <p className="mt-4 text-center text-lg">Reserva una clase de una hora conmigo</p>
 
       <div className="mt-10 flex flex-col items-center justify-center">
-        <Calendar />
+        {isUserLoggedIn ? (
+          <Calendar />
+        ) : (
+          <p className="pb-8 text-center">
+            Necesitas{' '}
+            <Link className="text-blue-600 hover:underline" href="/acceso">
+              Iniciar Sesión
+            </Link>{' '}
+            para reservar una clase 1 a 1
+          </p>
+        )}
       </div>
     </div>
   );

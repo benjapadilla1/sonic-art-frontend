@@ -17,6 +17,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { deleteCourse } from '@/functions/courses/deleteCourse';
+import { fetchCourses } from '@/functions/courses/fetchCourses';
 import { Course } from '@/types/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,11 +31,10 @@ export const CoursesCard = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
 
-  const fetchCourses = async () => {
+  const loadCourses = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`);
-      if (!res.ok) throw new Error('Error al obtener cursos');
-      const data = await res.json();
+      const data = await fetchCourses();
       setCourses(data);
     } catch (err) {
       console.error('Error fetching courses:', err);
@@ -43,18 +44,14 @@ export const CoursesCard = () => {
   };
 
   useEffect(() => {
-    fetchCourses();
+    loadCourses();
   }, []);
 
   const handleDeleteCourse = async (id: string) => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/${id}`, {
-        method: 'DELETE',
-      });
+      await deleteCourse(id);
 
-      if (!res.ok) throw new Error('Error al eliminar curso');
-
-      fetchCourses();
+      loadCourses();
       toast.success('Curso eliminado correctamente');
     } catch (err) {
       console.error('Error al eliminar curso:', err);

@@ -66,7 +66,7 @@ export const CourseModules = ({ course, setCourse }: CourseModulesProps) => {
       <h3 className="text-xl font-semibold">Módulos del curso</h3>
 
       <Accordion type="multiple" className="space-y-4">
-        {course.modules.map((mod, idx) => (
+        {course.modules?.map((mod, idx) => (
           <AccordionItem key={idx} value={`module-${idx}`} className="rounded-lg border">
             <AccordionTrigger className="px-4 py-3 text-lg font-medium">
               {mod.title || `Módulo ${idx + 1}`}

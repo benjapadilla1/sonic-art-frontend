@@ -6,15 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import Admin from './Admin';
 import LogButtons from './LogButtons';
-import { LogoutButton } from './LogOutButton';
 import { MobileNavbar } from './MobileNavbar';
 import { NavbarMenu } from './NavDropdown';
+import { UserProfile } from './UserProfile';
 
 const NavBar: React.FC = () => {
   const [isTop, setIsTop] = useState(true);
-  const { fetchAdminStatus, isAdmin } = useAuthStore();
+  const { fetchAdminStatus } = useAuthStore();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -55,8 +54,7 @@ const NavBar: React.FC = () => {
       </div>
       <NavbarMenu />
       <MobileNavbar />
-      {isAdmin && <Admin />}
-      {isUserLoggedIn ? <LogoutButton /> : <LogButtons />}
+      {isUserLoggedIn ? <UserProfile /> : <LogButtons />}
     </nav>
   );
 };

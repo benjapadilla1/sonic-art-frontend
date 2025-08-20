@@ -58,7 +58,7 @@ export const ContactForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-secondaryBg mx-auto w-full max-w-[500px] space-y-6 rounded-2xl p-6 text-white shadow-lg sm:space-y-8 sm:p-8"
+        className="bg-secondaryBg w-full max-w-[500px] space-y-6 rounded-2xl p-6 text-white shadow-lg sm:space-y-8 sm:p-8"
       >
         <FormField
           control={form.control}

@@ -20,7 +20,7 @@ interface SamplePack {
   createdAt: string;
 }
 
-export const SamplePacks = () => {
+export const AdminSamplePacks = () => {
   const [samplePacks, setSamplePacks] = useState<SamplePack[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmId, setConfirmId] = useState<string | null>(null);
