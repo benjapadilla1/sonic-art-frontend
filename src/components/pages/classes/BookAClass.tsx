@@ -1,11 +1,10 @@
 'use client';
 
-import { useAuthStore } from '@/stores/useAuthStore';
 import Link from 'next/link';
 import Calendar from './Calendar';
 
 const BookAClass = () => {
-  const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
+  const isUserLoggedIn = true;
 
   return (
     <div className="pt-2">

@@ -67,7 +67,7 @@ export const MobileNavbar = () => {
               Contacto
             </button>
             <Separator className="bg-ctas" />
-            {isUserLoggedIn ? <UserProfile isMobile /> : <LogButtons isMobile />}
+            {isUserLoggedIn ? <UserProfile isMobile /> : <LogButtons setOpen={setOpen} isMobile />}
           </nav>
         </SheetContent>
       </Sheet>
