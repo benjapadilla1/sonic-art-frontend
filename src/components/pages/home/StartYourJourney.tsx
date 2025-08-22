@@ -17,7 +17,7 @@ export const StartYourJourney = () => {
         <div className="flex flex-wrap justify-center gap-4 md:justify-start">
           <Button className="bg-secondaryLight rounded-xl px-6 py-4 hover:bg-white" asChild>
             <Link href="/acceso">
-              1 <p className="text-secondaryBg text-lg">Inscribite ahora</p>
+              <p className="text-secondaryBg text-lg">Inscribite ahora</p>
             </Link>
           </Button>
           <Button variant="outline" className="rounded-xl px-6 py-4" asChild>

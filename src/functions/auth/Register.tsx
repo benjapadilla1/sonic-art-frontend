@@ -1,16 +1,24 @@
 import { LogObject } from '@/components/pages/auth/AuthForm';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export async function register({ email, password }: LogObject) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+export async function register({ email, password, captcha }: LogObject) {
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
+      { email, password, captcha },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
-  if (!res.ok) throw new Error('Error de registro');
-
-  const { token } = await res.json();
-  localStorage.setItem('auth_token', token);
-  toast.success('Registro exitoso', { autoClose: 2000 });
+    localStorage.setItem('auth_token', data.token);
+    toast.success('Registro exitoso', { autoClose: 2000 });
+  } catch (error: unknown) {
+    console.error('Error en registro:', error);
+    throw new Error(
+      (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
+        'Error de registro'
+    );
+  }
 }
