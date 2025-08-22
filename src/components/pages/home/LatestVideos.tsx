@@ -34,7 +34,7 @@ const LatestVideos = () => {
     fetchVideos();
   }, []);
 
-  if (!videos.length || !videos) return <p className="text-center">Cargando videos...</p>;
+  if (!videos || !videos.length) return <p className="text-center">Cargando videos...</p>;
 
   return (
     <Section className="grid grid-cols-1 gap-8 md:grid-cols-3">
