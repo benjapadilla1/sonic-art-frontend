@@ -1,5 +1,6 @@
 import { Footer } from '@/components/local/Footer/Footer';
 import NavBar from '@/components/local/Navbar/NavBar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
@@ -20,9 +21,6 @@ export const metadata: Metadata = {
   title: 'Sonic Art | Cursos de Producción Musical',
   description:
     'Aprende producción musical con cursos online, sample packs y mentorías personalizadas.',
-  other: {
-    'trustpilot-one-time-domain-verification-id': '946b0be5-ac82-4bfe-9b3b-db5f57128759',
-  },
 };
 
 export default function RootLayout({
@@ -33,38 +31,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta
-          name="trustpilot-one-time-domain-verification-id"
-          content="946b0be5-ac82-4bfe-9b3b-db5f57128759"
-        />
         <title>Sonic Art | Cursos de Producción Musical</title>
         <meta
           name="description"
           content="Aprende producción musical con cursos online, sample packs y mentorías personalizadas."
         />
-        <script>
-          {`
-              (function(w,d,s,r,n){
-                w.TrustpilotObject=n;
-                w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
-                var a=d.createElement(s);
-                a.async=1;
-                a.src=r;
-                a.type='text/javascript';
-                var f=d.getElementsByTagName(s)[0];
-                f.parentNode.insertBefore(a,f);
-              })(window,document,'script','https://invitejs.trustpilot.com/tp.min.js','tp');
-              tp('register', 'MhtJ7lAtHo1nMuBU');
-          `}
-        </script>
       </head>
       <body
         className={`${geistSans.variable} bg-backgroundLight ${geistMono.variable} antialiased`}
       >
-        <ToastContainer />
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+          <ToastContainer />
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

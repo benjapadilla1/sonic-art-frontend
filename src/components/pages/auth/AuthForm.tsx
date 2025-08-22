@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { toast } from 'react-toastify';
+import GoogleLoginButton from './GoogleLoginButton';
 
 type AuthMode = 'login' | 'register';
 
@@ -54,6 +55,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
       <h2 className="font-engravers mb-6 text-center text-2xl font-bold text-gray-800">
         {mode === 'login' ? 'Iniciar sesión' : 'Crear una cuenta'}
       </h2>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           name="email"
@@ -83,6 +85,10 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
           {mode === 'login' ? 'Entrar' : 'Registrarse'}
         </Button>
       </form>
+
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <GoogleLoginButton />
+      </div>
 
       <div className="mt-4 text-center text-sm text-gray-600">
         {mode === 'login' ? (
