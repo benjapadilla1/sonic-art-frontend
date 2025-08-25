@@ -48,3 +48,11 @@ export interface SamplePack {
   createdAt: string;
   updatedAt?: string;
 }
+
+export interface User {
+  uid: string;
+  email: string;
+  name?: string;
+  photoURL?: string;
+  isAdmin?: boolean;
+}

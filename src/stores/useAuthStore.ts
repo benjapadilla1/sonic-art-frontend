@@ -1,12 +1,5 @@
+import { User } from '@/types/firestore';
 import { create } from 'zustand';
-
-interface User {
-  uid: string;
-  email: string;
-  name?: string;
-  avatarUrl?: string;
-  isAdmin?: boolean;
-}
 
 interface AuthState {
   token: string | null;
@@ -51,7 +44,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } catch (error) {
       console.error('No se pudo obtener el usuario:', error);
       set({ user: null, isLoggedIn: false, token: null });
-      localStorage.removeItem('auth_token');
     }
   },
 }));
