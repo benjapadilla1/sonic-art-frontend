@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { create } from 'zustand';
 
 interface CartItem {
@@ -51,6 +52,10 @@ export const useCartStore = create<CartStore>((set, get) => {
         if (typeof window !== 'undefined') {
           localStorage.setItem('cart', JSON.stringify(updated));
         }
+
+        toast.success(`"${item.title}" agregado al carrito`, { position: 'top-right' });
+      } else {
+        toast.error(`"${item.title}" ya está en el carrito`, { position: 'top-right' });
       }
     },
 

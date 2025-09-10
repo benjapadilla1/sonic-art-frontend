@@ -13,7 +13,8 @@ import { UserProfile } from './UserProfile';
 
 const NavBar: React.FC = () => {
   const [isTop, setIsTop] = useState(true);
-  const { fetchAdminStatus } = useAuthStore();
+  const [isAuthResolved, setIsAuthResolved] = useState(false);
+  const { fetchAdminStatus, isLoggedIn, token } = useAuthStore();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -28,11 +29,17 @@ const NavBar: React.FC = () => {
   }, [pathname]);
 
   useEffect(() => {
-    fetchAdminStatus();
-  }, [fetchAdminStatus]);
+    const initAuth = async () => {
+      if (token) {
+        await fetchAdminStatus();
+      }
+      setIsAuthResolved(true);
+    };
+
+    initAuth();
+  }, [fetchAdminStatus, token]);
 
   const isHome = pathname === '/';
-  const isUserLoggedIn = useAuthStore(state => state.isLoggedIn);
 
   return (
     <nav
@@ -54,7 +61,17 @@ const NavBar: React.FC = () => {
       </div>
       <NavbarMenu />
       <MobileNavbar />
-      {isUserLoggedIn ? <UserProfile /> : <LogButtons />}
+      <div className="flex w-48 items-center justify-end">
+        {isAuthResolved ? (
+          isLoggedIn ? (
+            <UserProfile />
+          ) : (
+            <LogButtons />
+          )
+        ) : (
+          <div className="h-10 w-full" />
+        )}
+      </div>
     </nav>
   );
 };

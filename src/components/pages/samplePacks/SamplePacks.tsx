@@ -1,16 +1,17 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchSamplePacks } from '@/functions/samplePacks/fetchSamplePacks';
+import { useCartStore } from '@/stores/useCartStore';
 import { SamplePack } from '@/types/firestore';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const SamplePacks = () => {
   const [samplePacks, setSamplePacks] = useState<SamplePack[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addItem } = useCartStore();
 
   const loadSamplePacks = async () => {
     try {
@@ -36,48 +37,78 @@ const SamplePacks = () => {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {samplePacks.map(samplePack => (
-        <Card key={samplePack.id} className="flex flex-col">
-          <CardHeader>
-            <Image
-              src={samplePack.coverImageUrl}
-              alt={samplePack.title}
-              className="h-48 w-full rounded-xl object-cover"
-            />
-          </CardHeader>
+    <div className="flex min-h-[800px] flex-col gap-2 pt-4">
+      <h2 className="font-engravers py-4 text-center text-3xl font-semibold">Sample Packs</h2>
 
-          <CardContent className="flex-1 space-y-2">
-            <CardTitle className="text-xl">{samplePack.title}</CardTitle>
-            <p className="text-muted-foreground line-clamp-3 text-sm">{samplePack.description}</p>
-            {samplePack.category && (
-              <Badge variant="secondary" className="mt-1">
-                {samplePack.category}
-              </Badge>
-            )}
-            <p className="mt-2 text-lg font-semibold">${samplePack.price}</p>
-            {samplePack.previewTracks?.length > 0 && (
-              <div className="mt-2 space-y-1">
-                <p className="text-sm font-medium">Preview tracks:</p>
-                {samplePack.previewTracks.map((track, index) => (
-                  <audio key={index} controls src={track} className="w-full rounded" />
-                ))}
+      <div className="flex flex-wrap justify-around gap-10 pt-4">
+        {samplePacks.map(samplePack => (
+          <div key={samplePack.id} className="group flex flex-col transition-all duration-500">
+            <Link href={`/sample-packs/${samplePack.id}`}>
+              <div className="text-secondaryLight bg-secondaryBg flex h-[600px] w-[350px] flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl">
+                <div className="h-64 w-full overflow-hidden rounded-xl">
+                  <Image
+                    src={samplePack.coverImageUrl ?? '/placeholder.jpg'}
+                    alt={samplePack.title}
+                    width={400}
+                    height={300}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="flex items-center justify-center text-center">
+                  <p className="font-engravers text-lg font-semibold">{samplePack.title}</p>
+                </div>
+
+                <div className="flex justify-between text-sm text-gray-400">
+                  {samplePack.category ? (
+                    <div className="bg-ctas rounded-xl px-3 py-1 text-white">
+                      <p>{samplePack.category}</p>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                  <p>Creado: {new Date(samplePack.createdAt).toLocaleDateString()}</p>
+                </div>
+
+                <p className="text-secondaryLight line-clamp-3 text-sm">{samplePack.description}</p>
+
+                {samplePack.previewTracks?.length > 0 && (
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">Preview:</p>
+                    {samplePack.previewTracks.map((track, index) => (
+                      <audio key={index} controls src={track} className="w-full rounded" />
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex-grow" />
+
+                <div className="flex items-center justify-between">
+                  <p className="flex gap-1 text-white">
+                    <span className="text-ctas">$</span>
+                    {samplePack.price}
+                  </p>
+                  <Button
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      addItem({
+                        id: samplePack.id,
+                        title: samplePack.title,
+                        type: 'samplePack',
+                        price: Number(samplePack.price),
+                        coverImageUrl: samplePack.coverImageUrl ?? '/placeholder.jpg',
+                      });
+                    }}
+                  >
+                    <p>Añadir al carrito</p>
+                  </Button>
+                </div>
               </div>
-            )}
-          </CardContent>
-
-          <CardFooter>
-            <Button
-              className="w-full"
-              onClick={() => {
-                // TODO Logic to add the sample pack to the cart}
-              }}
-            >
-              Añadir al carrito
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

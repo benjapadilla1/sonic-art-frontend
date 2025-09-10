@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuthStore } from '@/stores/useAuthStore';
 import axios from 'axios';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -12,8 +13,7 @@ interface User {
   uid: string;
   displayName?: string;
   email: string;
-  phone?: string;
-  bio?: string;
+  photoURL?: string;
   purchaseHistory?: string[];
   createdAt?: { _seconds: number; _nanoseconds: number };
   isAdmin?: boolean;
@@ -31,10 +31,7 @@ export default function Profile() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!formData) return;
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSave = async () => {
@@ -60,8 +57,22 @@ export default function Profile() {
     <div className="w-full max-w-xl rounded-2xl border bg-white p-6 shadow-md">
       <h2 className="mb-4 text-xl font-semibold">Perfil de Usuario</h2>
 
-      <div className="space-y-4">
-        <div>
+      <div className="mb-6 flex items-center gap-4">
+        <div className="relative h-16 w-16 overflow-hidden rounded-full border">
+          {formData?.photoURL ? (
+            <Image
+              src={formData.photoURL}
+              alt={formData.displayName || 'Usuario'}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gray-200 text-lg font-semibold text-gray-500">
+              {formData?.displayName?.[0] || 'U'}
+            </div>
+          )}
+        </div>
+        <div className="flex-1">
           <Label htmlFor="displayName">Nombre</Label>
           <Input
             id="displayName"
@@ -71,14 +82,14 @@ export default function Profile() {
             disabled={!editMode}
           />
         </div>
+      </div>
 
-        {/* Email (solo lectura) */}
+      <div className="space-y-4">
         <div>
           <Label htmlFor="email">Email</Label>
           <Input id="email" value={formData?.email || ''} disabled />
         </div>
 
-        {/* Fecha de creación */}
         {formData?.createdAt && (
           <div>
             <Label>Cuenta creada</Label>
@@ -88,7 +99,6 @@ export default function Profile() {
           </div>
         )}
 
-        {/* Historial de compras */}
         {formData?.purchaseHistory && formData.purchaseHistory.length > 0 && (
           <div>
             <Label>Historial de Compras</Label>

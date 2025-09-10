@@ -2,11 +2,11 @@ import { LogObject } from '@/components/pages/auth/AuthForm';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export async function register({ email, password, captcha }: LogObject) {
+export async function register({ email, password, displayName, captcha }: LogObject) {
   try {
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
-      { email, password, captcha },
+      { email, password, displayName, captcha },
       {
         headers: { 'Content-Type': 'application/json' },
       }

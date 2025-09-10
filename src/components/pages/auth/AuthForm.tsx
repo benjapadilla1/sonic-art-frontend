@@ -17,6 +17,7 @@ export interface LogObject {
   email: string;
   password: string;
   captcha: string | null;
+  displayName?: string;
 }
 
 interface AuthFormProps {
@@ -26,7 +27,7 @@ interface AuthFormProps {
 export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
   const router = useRouter();
 
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ email: '', password: '', displayName: '' });
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,10 +76,20 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
         />
 
         {mode === 'register' && (
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-            onChange={(token: string) => setCaptchaToken(token)}
-          />
+          <div className="flex flex-col gap-4">
+            <Input
+              name="displayName"
+              type="text"
+              placeholder="Nombre"
+              value={form.displayName}
+              onChange={handleChange}
+              required
+            />
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(token: string) => setCaptchaToken(token)}
+            />
+          </div>
         )}
 
         <Button type="submit" className="w-full rounded-md px-4 py-2">

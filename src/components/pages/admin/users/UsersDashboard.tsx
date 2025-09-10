@@ -8,6 +8,7 @@ type User = {
   uid: string;
   email: string;
   isAdmin?: boolean;
+  provider?: string;
   createdAt?: string;
 };
 
@@ -36,18 +37,14 @@ const columns: ColumnDef<User>[] = [
     accessorKey: 'uid',
     header: 'UID',
   },
-  // {
-  //   id: 'actions',
-  //   header: 'Acciones',
-  //   cell: ({ row }) => {
-  //     const user = row.original;
-  //     return (
-  //       <Button variant="outline" size="sm" onClick={() => console.log('Acción para:', user.uid)}>
-  //         ...
-  //       </Button>
-  //     );
-  //   },
-  // },
+  {
+    id: 'provider',
+    header: 'Se registró con',
+    cell: ({ row }) => {
+      const provider = row.original.provider;
+      return <span className="capitalize">{provider}</span>;
+    },
+  },
 ];
 
 const UsersDashboard = () => {

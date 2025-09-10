@@ -3,7 +3,11 @@ import Section from '@/components/ui/section';
 import Script from 'next/script';
 import { LabelLogoCarousel } from './LabelLogoCarousel';
 
-export const Testimonials = () => {
+interface TestimonialsProps {
+  isLandingPage?: boolean;
+}
+
+export const Testimonials = ({ isLandingPage }: TestimonialsProps) => {
   return (
     <Section className="">
       <p className="font-engravers text-secondaryBg mb-12 text-center text-3xl font-semibold">
@@ -21,14 +25,22 @@ export const Testimonials = () => {
         data-lazyload="false"
         style={{ display: 'block', width: '100%' }}
       />
-      <div className="mt-8 flex justify-center">
-        <a href="https://senja.io/p/sonicartlab/r/DZg3vo" target="_blank" rel="noopener noreferrer">
-          <Button size="lg" className="py-7 text-xl">
-            ¡Déjanos tu reseña!
-          </Button>
-        </a>
-      </div>
-      <LabelLogoCarousel />
+      {isLandingPage && (
+        <>
+          <div className="mt-8 flex justify-center">
+            <a
+              href="https://senja.io/p/sonicartlab/r/DZg3vo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="py-7 text-xl">
+                ¡Déjanos tu reseña!
+              </Button>
+            </a>
+          </div>
+          <LabelLogoCarousel />
+        </>
+      )}
     </Section>
   );
 };

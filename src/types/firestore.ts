@@ -26,6 +26,7 @@ export interface Module {
 export interface Course {
   id: string;
   title: string;
+  introVideoUrl?: string;
   description: string;
   price: string;
   duration: string;
@@ -37,7 +38,7 @@ export interface Course {
 }
 
 export interface SamplePack {
-  id?: string;
+  id: string;
   title: string;
   description: string;
   coverImageUrl: string;

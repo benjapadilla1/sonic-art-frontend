@@ -1,26 +1,34 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { useCartStore } from '@/stores/useCartStore';
 import axios from 'axios';
 import { ShoppingCart, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 
+const typeColors: Record<string, string> = {
+  course: 'bg-blue-100 text-blue-700',
+  samplePack: 'bg-purple-100 text-purple-700',
+};
+
 export function CartSheet() {
   const { items, total, removeItem, clearCart } = useCartStore();
+  const { user } = useAuthStore();
 
   const handleCheckout = async () => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/paypal/create-order`,
-        { items },
+        { items, userId: user?.uid },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      const data = res.data;
-      if (data?.href) {
-        window.location.href = data.href;
+      const { href } = res.data;
+      if (href) {
+        window.location.href = href;
       }
     } catch (error) {
       console.error('Error al crear la orden de PayPal:', error);
@@ -64,6 +72,11 @@ export function CartSheet() {
                   <div>
                     <p className="font-semibold">{item.title}</p>
                     <p className="text-sm text-gray-500">${item.price}</p>
+                    <Badge
+                      className={`${typeColors[item.type] || 'bg-gray-100 text-gray-600'} mt-1`}
+                    >
+                      {item.type === 'course' ? 'Curso' : 'Sample Pack'}
+                    </Badge>
                   </div>
                 </div>
                 <Button

@@ -1,4 +1,6 @@
+import { useAuthStore } from '@/stores/useAuthStore';
 import { CredentialResponse } from '@react-oauth/google';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
@@ -13,18 +15,18 @@ export async function handleGoogleLoginSuccess(
   }
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idToken }),
-    });
+    const { data } = await axios.post<{ token: string }>(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
+      { idToken }
+    );
 
-    if (!res.ok) {
-      throw new Error('Error en la autenticación');
-    }
+    const login = useAuthStore.getState().login;
+    const fetchAdminStatus = useAuthStore.getState().fetchAdminStatus;
 
-    const data: { token: string } = await res.json();
-    localStorage.setItem('auth_token', data.token);
+    login(data.token);
+
+    await fetchAdminStatus();
+
     toast.success('Login exitoso');
     router.push('/');
   } catch (err) {

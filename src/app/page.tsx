@@ -11,7 +11,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Hero />
       <Methodology />
-      <Testimonials />
+      <Testimonials isLandingPage />
       {/* <LastReleases /> */}
       <StartYourJourney />
       <LatestVideos />

@@ -29,7 +29,7 @@ export const UserProfile = ({ isMobile }: UserProfileProps) => {
 
   return (
     <div className={`flex gap-4 ${isMobile ? 'flex-col items-start' : 'items-center'}`}>
-      <Button variant="outline" className="text-white">
+      <Button variant="outline" className="hover:bg-ctas text-white hover:text-white">
         USD
       </Button>
       <CartSheet />
