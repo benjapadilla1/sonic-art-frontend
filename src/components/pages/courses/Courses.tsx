@@ -32,7 +32,7 @@ const Courses = () => {
               <div className="text-secondaryLight bg-secondaryBg flex h-[600px] w-[350px] flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl">
                 <div className="h-64 w-full overflow-hidden rounded-xl">
                   <Image
-                    src={course.coverImageUrl ?? '/placeholder.jpg'}
+                    src={course.coverImageUrl ?? ''}
                     alt={course.title}
                     width={400}
                     height={300}
@@ -68,7 +68,7 @@ const Courses = () => {
                         title: course.title,
                         type: 'course',
                         price: Number(course.price),
-                        coverImageUrl: course.coverImageUrl ?? '/placeholder.jpg',
+                        coverImageUrl: course.coverImageUrl ?? '',
                       });
                     }}
                   >

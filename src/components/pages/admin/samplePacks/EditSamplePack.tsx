@@ -22,7 +22,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
     description: '',
     imageUrl: '',
     previewUrls: ['', ''],
-    zipUrl: '',
+    downloadUrl: '',
     price: '',
   });
 
@@ -41,7 +41,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
           description: data.description,
           imageUrl: data.imageUrl,
           previewUrls: data.previewUrls || ['', ''],
-          zipUrl: data.zipUrl,
+          downloadUrl: data.downloadUrl,
           price: data.price.toString(),
         });
       } catch (err) {
@@ -171,9 +171,9 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
       <div className="space-y-2">
         <Label>Archivo ZIP actual</Label>
-        {formData.zipUrl && (
+        {formData.downloadUrl && (
           <a
-            href={formData.zipUrl}
+            href={formData.downloadUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 underline"

@@ -4,21 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { SamplePack } from '@/types/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-
-interface SamplePack {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  previewUrls: string[];
-  zipUrl: string;
-  price: number;
-  createdAt: string;
-}
 
 export const AdminSamplePacks = () => {
   const [samplePacks, setSamplePacks] = useState<SamplePack[]>([]);
@@ -82,7 +72,7 @@ export const AdminSamplePacks = () => {
               <CardContent className="space-y-2">
                 <div className="relative h-40">
                   <Image
-                    src={pack.imageUrl}
+                    src={pack.coverImageUrl ?? ''}
                     alt={pack.title}
                     fill
                     className="rounded-md object-cover"

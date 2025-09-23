@@ -63,7 +63,7 @@ export function CartSheet() {
               >
                 <div className="flex items-center gap-3">
                   <Image
-                    src={item.coverImageUrl ?? '/placeholder.jpg'}
+                    src={item.coverImageUrl ?? ''}
                     alt={item.title}
                     width={50}
                     height={50}

@@ -44,7 +44,7 @@ const DetailCourse = ({ id }: Props) => {
           <CardContent className="grid grid-cols-1 gap-10 p-8 md:grid-cols-2">
             <div className="flex items-center justify-center rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 dark:from-neutral-800 dark:to-neutral-900">
               <Image
-                src={course.coverImageUrl || '/placeholder.png'}
+                src={course.coverImageUrl || ''}
                 alt={course.title}
                 className="h-auto max-h-[400px] w-full object-contain drop-shadow-md"
                 width={600}
@@ -81,7 +81,7 @@ const DetailCourse = ({ id }: Props) => {
                     title: course.title,
                     type: 'course',
                     price: Number(course.price),
-                    coverImageUrl: course.coverImageUrl ?? '/placeholder.jpg',
+                    coverImageUrl: course.coverImageUrl ?? '',
                   });
                 }}
               >
@@ -92,7 +92,7 @@ const DetailCourse = ({ id }: Props) => {
         </Card>
       </Section>
 
-      <CourseIntroVideo videoUrl={course.introVideoUrl} />
+      <CourseIntroVideo videoUrl={course.modules[0].chapters[0].videoUrl} />
       <DetailCourseModules course={course} />
       <Testimonials />
       <FAQs />

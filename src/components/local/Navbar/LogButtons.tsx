@@ -33,16 +33,10 @@ const LogButtons = ({ isMobile, setOpen }: LogButtonsProps) => {
         </>
       ) : (
         <>
-          <Button
-            className="border-ctas font-engravers rounded-none border-2 bg-transparent"
-            asChild
-          >
+          <Button className="border-ctas font-engravers border-2 bg-transparent" asChild>
             <Link href="/acceso">Iniciar Sesión</Link>
           </Button>
-          <Button
-            className="border-ctas font-engravers rounded-none border-2 hover:bg-transparent"
-            asChild
-          >
+          <Button className="border-ctas font-engravers border-2 hover:bg-transparent" asChild>
             <Link href="/registro">Registrarse</Link>
           </Button>
         </>

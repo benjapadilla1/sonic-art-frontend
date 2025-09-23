@@ -47,7 +47,7 @@ const SamplePacks = () => {
               <div className="text-secondaryLight bg-secondaryBg flex h-[600px] w-[350px] flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl">
                 <div className="h-64 w-full overflow-hidden rounded-xl">
                   <Image
-                    src={samplePack.coverImageUrl ?? '/placeholder.jpg'}
+                    src={samplePack.coverImageUrl ?? ''}
                     alt={samplePack.title}
                     width={400}
                     height={300}
@@ -97,7 +97,7 @@ const SamplePacks = () => {
                         title: samplePack.title,
                         type: 'samplePack',
                         price: Number(samplePack.price),
-                        coverImageUrl: samplePack.coverImageUrl ?? '/placeholder.jpg',
+                        coverImageUrl: samplePack.coverImageUrl ?? '',
                       });
                     }}
                   >
