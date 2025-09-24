@@ -8,16 +8,15 @@ import { SamplePack } from '@/types/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FAQs } from '../FAQs';
-import { PreviewTracks } from './PreviewTracks';
 
 type DetailSamplePackProps = {
   id: string;
 };
 
 const previewTracks = [
-  'https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c7f61213b.mp3?filename=ambient-piano-110624.mp3',
-  'https://cdn.pixabay.com/download/audio/2022/03/15/audio_7a9e75d24a.mp3?filename=relaxing-music-112191.mp3',
-  'https://cdn.pixabay.com/download/audio/2021/09/02/audio_92c6d372b3.mp3?filename=chill-ambient-10960.mp3',
+  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
 ];
 
 const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
@@ -85,9 +84,9 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
             </div>
           </CardContent>
         </Card>
-        <PreviewTracks previewTracks={previewTracks} />
+        {/* <PreviewTracks previewTracks={previewTracks} /> */}
 
-        {/* <div className="mt-10">
+        <div className="mt-10">
           <h2 className="font-engravers mb-6 text-2xl font-bold text-gray-900">
             Escucha un adelanto
           </h2>
@@ -113,7 +112,7 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
           ) : (
             <p className="text-gray-500">Todavía no hay previews disponibles.</p>
           )}
-        </div> */}
+        </div>
       </div>
 
       <div className="w-full pt-10">
