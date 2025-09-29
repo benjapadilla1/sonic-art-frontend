@@ -24,6 +24,7 @@ export const CreateCourse = () => {
     price: '',
     duration: '',
     coverImageUrl: '',
+    introVideoUrl: '',
     modules: [] as Module[],
   });
 
@@ -36,6 +37,15 @@ export const CreateCourse = () => {
         setFormData(prev => ({ ...prev, coverImageUrl: reader.result as string }));
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const introVideoUrl = URL.createObjectURL(file);
+      setFormData(prev => ({ ...prev, introVideoUrl }));
     }
   };
 
@@ -145,7 +155,6 @@ export const CreateCourse = () => {
       )
     );
 
-    // Archivos de video
     formData.modules.forEach((mod, modIdx) => {
       mod.chapters?.forEach((ch, chapIdx) => {
         const fieldName = `video-${modIdx}-${chapIdx}`;
@@ -225,6 +234,19 @@ export const CreateCourse = () => {
               height={200}
               className="mt-2 rounded-md border"
             />
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="video">Video de introducción del curso</Label>
+          <Input
+            id="video"
+            className="file:px-2"
+            type="file"
+            accept="video/*"
+            onChange={e => handleVideoChange(e)}
+          />
+          {formData.introVideoUrl && (
+            <video src={formData.introVideoUrl} controls className="mt-2 rounded-md border" />
           )}
         </div>
 

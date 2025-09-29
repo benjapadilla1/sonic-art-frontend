@@ -76,7 +76,6 @@ const PurchasedSamplePacks = () => {
                     ) : (
                       <div />
                     )}
-                    <p>Creado: {new Date(samplePack.createdAt).toLocaleDateString()}</p>
                   </div>
 
                   <p className="text-secondaryLight line-clamp-3 text-sm">

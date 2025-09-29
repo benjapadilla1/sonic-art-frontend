@@ -84,7 +84,6 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
             </div>
           </CardContent>
         </Card>
-        {/* <PreviewTracks previewTracks={previewTracks} /> */}
 
         <div className="mt-10">
           <h2 className="font-engravers mb-6 text-2xl font-bold text-gray-900">

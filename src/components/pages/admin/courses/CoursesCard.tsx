@@ -19,7 +19,8 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { deleteCourse } from '@/functions/courses/deleteCourse';
 import { fetchCourses } from '@/functions/courses/fetchCourses';
-import { Course } from '@/types/firestore';
+import type { Course } from '@/types/firestore';
+import { BookOpen, Clock, Edit3, Plus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -50,7 +51,6 @@ export const CoursesCard = () => {
   const handleDeleteCourse = async (id: string) => {
     try {
       await deleteCourse(id);
-
       loadCourses();
       toast.success('Curso eliminado correctamente');
     } catch (err) {
@@ -63,59 +63,87 @@ export const CoursesCard = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
-        <h2 className="font-engravers text-2xl font-bold">Cursos</h2>
-        <Link href={`/admin/cursos/crear`}>
-          <Button>Crear Curso</Button>
+    <section className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="icon-wrapper">
+            <BookOpen className="text-primary h-6 w-6" />
+          </div>
+          <div>
+            <h2 className="font-display gradient-text-primary text-3xl">Cursos</h2>
+            <p className="text-muted-foreground mt-1">
+              Gestiona el contenido educativo de la academia
+            </p>
+          </div>
+        </div>
+
+        <Link href="/admin/cursos/crear">
+          <Button className="gap-2 px-6 py-3 text-base">
+            <Plus className="h-5 w-5" />
+            Crear Curso
+          </Button>
         </Link>
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(6)].map((_, i) => (
-            <Skeleton key={i} className="h-48 w-full rounded-xl" />
+            <div key={i} className="admin-card rounded-xl p-6">
+              <Skeleton className="loading-skeleton mb-4 h-48 w-full rounded-lg" />
+              <Skeleton className="loading-skeleton mb-2 h-6 w-3/4" />
+              <Skeleton className="loading-skeleton mb-4 h-4 w-full" />
+              <div className="flex gap-2">
+                <Skeleton className="loading-skeleton h-9 w-20" />
+                <Skeleton className="loading-skeleton h-9 w-20" />
+              </div>
+            </div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map(course => (
-            <Card
-              key={course.id}
-              className="flex flex-col shadow-lg transition-shadow duration-300 hover:shadow-xl"
-            >
-              {course.coverImageUrl ? (
-                <div className="relative -mt-6 h-64 w-full">
+            <Card key={course.id} className="admin-card group overflow-hidden">
+              <div className="relative h-48 overflow-hidden">
+                {course.coverImageUrl ? (
                   <Image
-                    src={course.coverImageUrl}
+                    src={course.coverImageUrl || '/placeholder.svg'}
                     alt={`Portada del curso ${course.title}`}
                     fill
-                    className="rounded-t-lg object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </div>
-              ) : (
-                <Skeleton className="-mt-6 h-64 w-full rounded-xl" />
-              )}
+                ) : (
+                  <div className="bg-muted flex h-full items-center justify-center">
+                    <BookOpen className="text-muted-foreground h-12 w-12" />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </div>
 
-              <CardHeader className="flex flex-col gap-1 px-4 pt-4">
-                <CardTitle className="text-lg font-semibold">{course.title}</CardTitle>
-                <CardDescription className="text-muted-foreground line-clamp-3 text-sm">
+              <CardHeader className="space-y-3">
+                <CardTitle className="font-heading group-hover:text-primary line-clamp-2 text-xl transition-colors">
+                  {course.title}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground line-clamp-3">
                   {course.description}
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="flex-grow space-y-1 px-4 pt-2 pb-4">
-                <p className="text-muted-foreground text-sm">
-                  <strong>Precio:</strong> ${course.price}
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  <strong>Duración:</strong> {course.duration} hs
-                </p>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="text-muted-foreground flex items-center gap-2">
+                    <span className="font-medium">${course.price}</span>
+                  </div>
+                  <div className="text-muted-foreground flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{course.duration} hs</span>
+                  </div>
+                </div>
               </CardContent>
 
-              <CardFooter className="flex items-center justify-between px-4 pt-2 pb-4">
-                <Link href={`/admin/cursos/${course.id}`}>
-                  <Button variant="outline" size="sm">
+              <CardFooter className="flex gap-3 pt-4">
+                <Link href={`/admin/cursos/${course.id}`} className="flex-1">
+                  <Button variant="outline" size="sm" className="w-full gap-2 bg-transparent">
+                    <Edit3 className="h-4 w-4" />
                     Editar
                   </Button>
                 </Link>
@@ -126,34 +154,45 @@ export const CoursesCard = () => {
                   }}
                   variant="destructive"
                   size="sm"
+                  className="gap-2"
                 >
+                  <Trash2 className="h-4 w-4" />
                   Eliminar
                 </Button>
               </CardFooter>
             </Card>
           ))}
-
-          <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-            <DialogContent className="bg-secondaryLight flex flex-col gap-3">
-              <DialogHeader>
-                <DialogTitle>¿Estás seguro que querés eliminar este curso?</DialogTitle>
-              </DialogHeader>
-              <p className="pl-2 text-sm">Esta acción no se puede deshacer.</p>
-              <DialogFooter>
-                <Button className="bg-white" variant="outline" onClick={() => setOpenDialog(false)}>
-                  Cancelar
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => selectedCourseId && handleDeleteCourse(selectedCourseId)}
-                >
-                  Eliminar
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
         </div>
       )}
-    </div>
+
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent className="glass-effect border-destructive/20">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3 text-xl">
+              <div className="bg-destructive/10 rounded-full p-2">
+                <Trash2 className="text-destructive h-5 w-5" />
+              </div>
+              ¿Eliminar este curso?
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-muted-foreground py-4">
+            Esta acción no se puede deshacer. El curso será eliminado permanentemente.
+          </p>
+          <DialogFooter className="gap-3">
+            <Button variant="outline" onClick={() => setOpenDialog(false)}>
+              Cancelar
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => selectedCourseId && handleDeleteCourse(selectedCourseId)}
+              className="gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Eliminar Curso
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </section>
   );
 };
