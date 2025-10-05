@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { dataURLtoFile } from '@/functions/cloud/DataURLToFile';
+import { createCourse } from '@/functions/courses/createCourse';
 import { Chapter, Module } from '@/types/firestore';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -15,7 +16,6 @@ import { VideoUploader } from '../VideoUploader';
 
 export const CreateCourse = () => {
   const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ export const CreateCourse = () => {
     price: '',
     duration: '',
     coverImageUrl: '',
-    introVideoUrl: '',
+    introVideoUrl: null as File | null,
     modules: [] as Module[],
   });
 
@@ -44,8 +44,7 @@ export const CreateCourse = () => {
     const file = e.target.files?.[0];
 
     if (file) {
-      const introVideoUrl = URL.createObjectURL(file);
-      setFormData(prev => ({ ...prev, introVideoUrl }));
+      setFormData(prev => ({ ...prev, introVideoUrl: file }));
     }
   };
 
@@ -124,16 +123,18 @@ export const CreateCourse = () => {
     setIsLoading(true);
 
     const form = new FormData();
-
     form.append('title', formData.title);
     form.append('description', formData.description);
     form.append('price', formData.price);
     form.append('duration', formData.duration);
 
-    // Imagen
     if (formData.coverImageUrl) {
       const imageFile = dataURLtoFile(formData.coverImageUrl, 'cover.jpg');
       form.append('coverImage', imageFile);
+    }
+
+    if (formData.introVideoUrl) {
+      form.append('introVideo', formData.introVideoUrl);
     }
 
     form.append(
@@ -165,13 +166,7 @@ export const CreateCourse = () => {
     });
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`, {
-        method: 'POST',
-        body: form,
-      });
-
-      if (!res.ok) throw new Error('Error al crear curso');
-
+      await createCourse(form);
       router.push('/admin');
       toast.success('Curso creado correctamente');
     } catch (err) {
@@ -246,7 +241,11 @@ export const CreateCourse = () => {
             onChange={e => handleVideoChange(e)}
           />
           {formData.introVideoUrl && (
-            <video src={formData.introVideoUrl} controls className="mt-2 rounded-md border" />
+            <video
+              src={URL.createObjectURL(formData.introVideoUrl)}
+              controls
+              className="mt-2 rounded-md border"
+            />
           )}
         </div>
 

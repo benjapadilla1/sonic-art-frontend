@@ -344,18 +344,6 @@ export const CreateSamplePack = () => {
                 </div>
               </CardContent>
             </Card>
-
-            <Card className="border-2 border-blue-200 bg-blue-50">
-              <CardHeader>
-                <CardTitle className="text-blue-900">💡 Consejos</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-blue-800">
-                <p>• Usa una imagen de portada de alta calidad (1400x1400px)</p>
-                <p>• Los previews deben ser de 30-60 segundos</p>
-                <p>• Organiza tu ZIP con carpetas claras</p>
-                <p>• Incluye información de BPM y tonalidad</p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
