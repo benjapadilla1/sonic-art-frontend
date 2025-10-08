@@ -1,6 +1,10 @@
-import { LogObject } from '@/components/pages/auth/AuthForm';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { toast } from 'react-toastify';
+
+interface LogObject {
+  email: string;
+  password: string;
+}
 
 export async function login({ email, password }: LogObject) {
   const loginFunction = useAuthStore.getState().login;

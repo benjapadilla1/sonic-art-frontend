@@ -28,6 +28,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
   const router = useRouter();
 
   const [form, setForm] = useState({ email: '', password: '', displayName: '' });
+  const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +37,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!captchaToken && mode === 'register') {
       toast.info('Por favor confirma que no sos un robot.');
@@ -43,7 +45,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
     }
 
     if (mode === 'login') {
-      await login({ ...form, captcha: captchaToken });
+      await login({ ...form });
       router.push('/');
     } else {
       await register({ ...form, captcha: captchaToken });
@@ -92,7 +94,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
           </div>
         )}
 
-        <Button type="submit" className="w-full rounded-md px-4 py-2">
+        <Button type="submit" disabled={loading} className="w-full rounded-md px-4 py-2">
           {mode === 'login' ? 'Entrar' : 'Registrarse'}
         </Button>
       </form>
