@@ -4,7 +4,7 @@ import Section from '@/components/ui/section';
 export const DiscordSection = () => {
   return (
     <Section className="bg-secondaryBg flex flex-col items-center justify-center gap-5 text-white">
-      <p className="font-engravers text-3xl font-semibold">
+      <p className="text-3xl font-semibold tracking-tight">
         Sumate a nuestra comunidad de artistas
       </p>
       <p>Unite a nuestro Discord y conectá con otros productores</p>

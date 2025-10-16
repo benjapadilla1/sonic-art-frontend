@@ -17,14 +17,14 @@ const LogButtons = ({ isMobile, setOpen }: LogButtonsProps) => {
       {isMobile ? (
         <>
           <Button
-            className="border-ctas font-engravers text-secondaryBlack bg-secondaryLight w-1/2 rounded-none border-1 hover:text-white"
+            className="border-ctas text-secondaryBlack bg-secondaryLight w-1/2 rounded-none border-1 tracking-tight hover:text-white"
             asChild
             onClick={() => setOpen?.(false)}
           >
             <Link href="/acceso">Iniciar Sesión</Link>
           </Button>
           <Button
-            className="border-ctas font-engravers hover:text-secondaryBlack w-1/2 rounded-none border-1 hover:bg-transparent"
+            className="border-ctas hover:text-secondaryBlack w-1/2 rounded-none border-1 tracking-tight text-white hover:bg-transparent"
             asChild
             onClick={() => setOpen?.(false)}
           >
@@ -33,10 +33,13 @@ const LogButtons = ({ isMobile, setOpen }: LogButtonsProps) => {
         </>
       ) : (
         <>
-          <Button className="border-ctas font-engravers border-2 bg-transparent" asChild>
+          <Button className="border-ctas border-2 bg-transparent tracking-tight text-white" asChild>
             <Link href="/acceso">Iniciar Sesión</Link>
           </Button>
-          <Button className="border-ctas font-engravers border-2 hover:bg-transparent" asChild>
+          <Button
+            className="border-ctas border-2 tracking-tight text-white hover:bg-transparent"
+            asChild
+          >
             <Link href="/registro">Registrarse</Link>
           </Button>
         </>

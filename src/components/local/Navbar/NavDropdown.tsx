@@ -19,7 +19,7 @@ export function NavbarMenu() {
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
-                'font-engravers text-backgroundLight text-lg font-semibold')
+                'text-backgroundLight text-lg font-semibold tracking-tight')
               }
             >
               Cursos
@@ -31,7 +31,7 @@ export function NavbarMenu() {
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
-                'font-engravers text-backgroundLight text-lg font-semibold')
+                'text-backgroundLight text-lg font-semibold tracking-tight')
               }
             >
               Sample Packs
@@ -43,7 +43,7 @@ export function NavbarMenu() {
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
-                'font-engravers text-backgroundLight text-lg font-semibold')
+                'text-backgroundLight text-lg font-semibold tracking-tight')
               }
             >
               Clases 1 a 1
@@ -55,7 +55,7 @@ export function NavbarMenu() {
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
-                'font-engravers text-backgroundLight text-lg font-semibold')
+                'text-backgroundLight text-lg font-semibold tracking-tight')
               }
             >
               Sobre nosotros
@@ -67,7 +67,7 @@ export function NavbarMenu() {
             <NavigationMenuLink
               className={
                 (navigationMenuTriggerStyle(),
-                'font-engravers text-backgroundLight text-lg font-semibold')
+                'text-backgroundLight text-lg font-semibold tracking-tight')
               }
             >
               Contacto

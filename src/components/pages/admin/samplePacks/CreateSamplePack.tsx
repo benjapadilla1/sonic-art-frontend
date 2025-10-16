@@ -87,17 +87,17 @@ export const CreateSamplePack = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+    <div className="min-h-screen p-6">
       <div className="mx-auto max-w-4xl">
         <div className="mb-8 text-center">
-          <h1 className="mb-2 text-4xl font-bold text-slate-900">Crear Sample Pack</h1>
+          <h1 className="mb-2 text-4xl font-bold">Crear Sample Pack</h1>
           <p className="text-slate-600">Sube tu contenido musical y compártelo con el mundo</p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
-            <Card className="border-2 border-slate-200 shadow-lg">
-              <CardHeader className="rounded-t-lg bg-slate-900 text-white">
+            <Card className="border-2 border-slate-200 pt-0 shadow-lg">
+              <CardHeader className="bg-ctas rounded-t-lg pt-2 text-white">
                 <CardTitle className="flex items-center gap-3">
                   <Badge
                     variant="secondary"
@@ -109,7 +109,7 @@ export const CreateSamplePack = () => {
                   Información Básica
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4 p-6">
+              <CardContent className="space-y-4 px-6 pb-6">
                 <div className="space-y-2">
                   <Label htmlFor="title" className="font-medium text-slate-700">
                     Título del Sample Pack
@@ -157,8 +157,8 @@ export const CreateSamplePack = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-slate-200 shadow-lg">
-              <CardHeader className="rounded-t-lg bg-slate-900 text-white">
+            <Card className="border-2 border-slate-200 pt-0 shadow-lg">
+              <CardHeader className="bg-ctas rounded-t-lg pt-2 text-white">
                 <CardTitle className="flex items-center gap-3">
                   <Badge
                     variant="secondary"
@@ -203,8 +203,8 @@ export const CreateSamplePack = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-slate-200 shadow-lg">
-              <CardHeader className="rounded-t-lg bg-slate-900 text-white">
+            <Card className="border-2 border-slate-200 pt-0 shadow-lg">
+              <CardHeader className="bg-ctas rounded-t-lg pt-2 text-white">
                 <CardTitle className="flex items-center gap-3">
                   <Badge
                     variant="secondary"
@@ -251,8 +251,8 @@ export const CreateSamplePack = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-slate-200 shadow-lg">
-              <CardHeader className="rounded-t-lg bg-slate-900 text-white">
+            <Card className="border-2 border-slate-200 pt-0 shadow-lg">
+              <CardHeader className="bg-ctas rounded-t-lg pt-2 text-white">
                 <CardTitle className="flex items-center gap-3">
                   <Badge
                     variant="secondary"
@@ -299,9 +299,9 @@ export const CreateSamplePack = () => {
           </div>
 
           <div className="space-y-6">
-            <Card className="sticky top-6 border-2 border-slate-200 shadow-lg">
-              <CardHeader className="rounded-t-lg bg-slate-900 text-white">
-                <CardTitle>Resumen</CardTitle>
+            <Card className="sticky top-20 border-2 border-slate-200 pt-0 shadow-lg">
+              <CardHeader className="bg-ctas rounded-t-lg pt-2 text-white">
+                <CardTitle className="text-lg">Resumen</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 p-6">
                 <div className="space-y-3">

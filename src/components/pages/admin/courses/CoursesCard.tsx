@@ -166,7 +166,7 @@ export const CoursesCard = () => {
       )}
 
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent className="glass-effect border-destructive/20">
+        <DialogContent className="glass-effect border-destructive/20 bg-white backdrop-blur-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-3 text-xl">
               <div className="bg-destructive/10 rounded-full p-2">

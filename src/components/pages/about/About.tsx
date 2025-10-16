@@ -13,7 +13,7 @@ export default function AboutUsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="font-engravers mb-12 text-center text-3xl font-semibold sm:text-4xl md:text-5xl">
+        <h3 className="mb-12 text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
           Mi Historia
         </h3>
 

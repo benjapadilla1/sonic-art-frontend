@@ -23,14 +23,14 @@ const Courses = () => {
 
   return (
     <div className="flex min-h-[800px] flex-col gap-2 pt-4">
-      <h2 className="font-engravers py-4 text-center text-3xl font-semibold">Nuestros Cursos</h2>
+      <h2 className="py-4 text-center text-3xl font-semibold tracking-tight">Nuestros Cursos</h2>
 
       <div className="flex flex-wrap justify-around gap-10 pt-4">
         {courses.map(course => (
           <div key={course.id} className="group flex flex-col transition-all duration-500">
             <Link href={`/cursos/${course.id}`}>
               <div className="text-secondaryLight bg-secondaryBg flex h-[600px] w-[350px] flex-col gap-4 rounded-2xl px-4 py-6 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl">
-                <div className="h-64 w-full overflow-hidden rounded-xl">
+                <div className="h-64 w-full flex-shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={course.coverImageUrl ?? ''}
                     alt={course.title}
@@ -41,7 +41,7 @@ const Courses = () => {
                 </div>
 
                 <div className="flex items-center justify-center text-center">
-                  <p className="font-engravers text-lg font-semibold">{course.title}</p>
+                  <p className="text-lg font-semibold tracking-tight">{course.title}</p>
                 </div>
 
                 <div className="flex justify-between text-sm text-gray-400">
@@ -50,11 +50,11 @@ const Courses = () => {
                   </div>
                 </div>
 
-                <p className="text-secondaryLight text-sm">{course.description}</p>
+                <p className="text-secondaryLight line-clamp-3 text-sm">{course.description}</p>
 
                 <div className="flex-grow" />
 
-                <div className="flex items-center justify-between">
+                <div className="mt-2 flex items-center justify-between">
                   <p className="flex gap-1 text-white">
                     <span className="text-ctas">$</span>
                     {course.price}

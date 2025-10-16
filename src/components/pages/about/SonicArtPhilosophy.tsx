@@ -14,7 +14,7 @@ export const SonicArtPhilosophy = () => {
         viewport={{ once: true }}
         className="flex flex-col items-center gap-12"
       >
-        <h2 className="font-engravers text-center text-3xl font-bold tracking-widest text-white md:text-5xl">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-white md:text-5xl">
           Nuestra filosofía
         </h2>
 

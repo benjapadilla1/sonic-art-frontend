@@ -36,7 +36,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       });
 
       if (!response.ok) {
-        throw new Error('Error al obtener el usuario');
+        set({ user: null, isLoggedIn: false, token: null });
+        return;
       }
 
       const data = await response.json();

@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Born = () => {
   return (
     <Section className="bg-secondaryLight text-secondaryBlack flex w-screen flex-col items-center justify-center py-16">
-      <h3 className="font-engravers mb-10 text-center text-4xl font-semibold">
+      <h3 className="mb-10 text-center text-4xl font-bold tracking-tight sm:text-5xl">
         ¿Cómo nació Sonic Art?
       </h3>
       <div className="flex w-full max-w-6xl flex-col-reverse items-center gap-12 md:flex-row md:items-stretch md:gap-16">

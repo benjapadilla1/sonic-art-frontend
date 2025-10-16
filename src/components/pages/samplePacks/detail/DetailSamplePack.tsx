@@ -13,12 +13,6 @@ type DetailSamplePackProps = {
   id: string;
 };
 
-const previewTracks = [
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-];
-
 const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
   const [samplePack, setSamplePack] = useState<SamplePack | null>(null);
   const { addItem } = useCartStore();
@@ -86,12 +80,12 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
         </Card>
 
         <div className="mt-10">
-          <h2 className="font-engravers mb-6 text-2xl font-bold text-gray-900">
+          <h2 className="mb-6 text-2xl font-bold tracking-tight text-gray-900">
             Escucha un adelanto
           </h2>
-          {previewTracks && previewTracks.length > 0 ? (
+          {samplePack.previewTracks && samplePack.previewTracks.length > 0 ? (
             <div className="space-y-8">
-              {previewTracks.map((preview, idx) => (
+              {samplePack.previewTracks.map((preview, idx) => (
                 <div
                   key={idx}
                   className="rounded-xl border border-gray-200 bg-white p-5 shadow-md transition hover:shadow-lg"

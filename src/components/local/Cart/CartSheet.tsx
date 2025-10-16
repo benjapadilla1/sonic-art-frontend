@@ -8,6 +8,7 @@ import { useCartStore } from '@/stores/useCartStore';
 import axios from 'axios';
 import { ShoppingCart, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 const typeColors: Record<string, string> = {
   course: 'bg-blue-100 text-blue-700',
@@ -30,7 +31,10 @@ export function CartSheet() {
       if (href) {
         window.location.href = href;
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.status === 409) {
+        toast.error('Uno o más items ya fueron comprados.');
+      }
       console.error('Error al crear la orden de PayPal:', error);
     }
   };

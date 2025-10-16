@@ -39,7 +39,7 @@ export default function Methodology() {
   return (
     <Section className="bg-secondaryBg flex flex-col items-center gap-20 rounded-none px-4 py-16 sm:px-6 md:px-8">
       <motion.h2
-        className="font-engravers text-backgroundLight text-center text-4xl font-bold tracking-widest uppercase md:text-5xl"
+        className="text-backgroundLight text-center text-4xl font-bold tracking-tight uppercase md:text-5xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -64,7 +64,7 @@ export default function Methodology() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <h3 className="text-backgroundLight font-engravers text-center text-xl font-bold">
+            <h3 className="text-backgroundLight text-center text-xl font-bold tracking-tight">
               {step.title}
             </h3>
             <p className="text-backgroundLight mt-2 text-center">{step.description}</p>

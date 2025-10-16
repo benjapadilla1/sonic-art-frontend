@@ -4,7 +4,7 @@ import Section from '@/components/ui/section';
 const Community = () => {
   return (
     <Section className="flex flex-col justify-center gap-5">
-      <h2 className="font-engravers text-center text-3xl font-bold tracking-widest md:text-5xl">
+      <h2 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
         Sumate a nuestra comunidad de artistas
       </h2>
       <div className="flex flex-col justify-center gap-4 text-center">

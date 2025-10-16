@@ -55,7 +55,7 @@ export const AuthForm = ({ mode = 'login' }: AuthFormProps) => {
 
   return (
     <div className="w-full max-w-md rounded-xl border bg-white p-8 shadow-lg">
-      <h2 className="font-engravers mb-6 text-center text-2xl font-bold text-gray-800">
+      <h2 className="mb-6 text-center text-2xl font-bold tracking-tight text-gray-800">
         {mode === 'login' ? 'Iniciar sesión' : 'Crear una cuenta'}
       </h2>
 

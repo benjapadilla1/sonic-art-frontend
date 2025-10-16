@@ -38,7 +38,7 @@ const SamplePacks = () => {
 
   return (
     <div className="flex min-h-[800px] flex-col gap-2 pt-4">
-      <h2 className="font-engravers py-4 text-center text-3xl font-semibold">Sample Packs</h2>
+      <h2 className="py-4 text-center text-3xl font-bold tracking-tight">Sample Packs</h2>
 
       <div className="flex flex-wrap justify-around gap-10 pt-4">
         {samplePacks.map(samplePack => (
@@ -56,7 +56,7 @@ const SamplePacks = () => {
                 </div>
 
                 <div className="flex items-center justify-center text-center">
-                  <p className="font-engravers text-lg font-semibold">{samplePack.title}</p>
+                  <p className="text-lg font-bold tracking-tight">{samplePack.title}</p>
                 </div>
 
                 <div className="flex justify-between text-sm text-gray-400">

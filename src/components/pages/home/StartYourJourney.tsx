@@ -7,7 +7,7 @@ export const StartYourJourney = () => {
   return (
     <Section className="bg-ctas flex flex-col-reverse items-center justify-between gap-6 rounded-none py-16 text-white md:flex-row md:gap-0 md:py-20">
       <div className="flex w-full flex-col items-center justify-center gap-6 px-6 md:w-1/2 md:items-start md:px-12">
-        <p className="font-engravers text-center text-3xl font-semibold md:text-left md:text-4xl">
+        <p className="text-center text-3xl font-semibold tracking-tight md:text-left md:text-4xl">
           ¿Listo para comenzar tu camino en la producción musical?
         </p>
         <p className="max-w-xl text-center text-lg md:text-left">

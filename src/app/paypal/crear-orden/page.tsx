@@ -33,7 +33,7 @@ export default function Page() {
   }, [clearCart, router]);
 
   return (
-    <p className="font-engravers min-h-screen py-20 text-center text-2xl font-semibold">
+    <p className="min-h-screen py-20 text-center text-4xl font-bold tracking-tight sm:text-5xl">
       Procesando pago...
     </p>
   );

@@ -47,7 +47,7 @@ const LatestVideos = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-          <p className="font-engravers font-bold">{video.snippet.title}</p>
+          <p className="font-bold tracking-tight">{video.snippet.title}</p>
         </div>
       ))}
     </Section>

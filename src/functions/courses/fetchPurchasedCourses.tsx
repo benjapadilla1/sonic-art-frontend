@@ -7,6 +7,5 @@ export const fetchPurchasedCourses = async (id: string) => {
     return res.data;
   } catch (err) {
     console.error('Error fetching purchased courses:', err);
-    throw err;
   }
 };

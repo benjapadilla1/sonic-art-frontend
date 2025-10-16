@@ -46,7 +46,7 @@ const coursesFAQs = [
 export function FAQs() {
   return (
     <div className="bg-secondaryBg w-full p-20">
-      <h1 className="font-engravers text-backgroundLight mb-10 text-center text-3xl font-bold">
+      <h1 className="text-backgroundLight mb-10 text-center text-3xl font-bold tracking-tight">
         Preguntas Frecuentes
       </h1>
       <Accordion type="multiple" className="mx-auto w-full max-w-2xl">

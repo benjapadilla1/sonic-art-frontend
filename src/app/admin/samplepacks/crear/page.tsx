@@ -1,8 +1,51 @@
+'use client';
+
 import { CreateSamplePack } from '@/components/pages/admin/samplePacks/CreateSamplePack';
 import { Button } from '@/components/ui/button';
+import { useAuthStore } from '@/stores/useAuthStore';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-const page = () => {
+const CreateSamplePackPage = () => {
+  const router = useRouter();
+  const { token, fetchAdminStatus } = useAuthStore();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const verifyAccess = async () => {
+      if (!token) {
+        router.push('/acceso');
+        return;
+      }
+
+      await fetchAdminStatus();
+      const { isLoggedIn, isAdmin } = useAuthStore.getState();
+
+      if (!isLoggedIn) {
+        router.push('/acceso');
+        return;
+      }
+
+      if (!isAdmin) {
+        router.push('/');
+        return;
+      }
+
+      setLoading(false);
+    };
+
+    verifyAccess();
+  }, [token, router, fetchAdminStatus]);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-muted-foreground text-lg">Verificando acceso...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20">
       <Link className="p-6" href={`/admin`}>
@@ -13,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreateSamplePackPage;

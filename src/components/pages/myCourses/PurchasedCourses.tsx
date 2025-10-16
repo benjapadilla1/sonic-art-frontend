@@ -38,7 +38,7 @@ const PurchasedCourses = () => {
 
   if (loading) {
     return (
-      <div className="flex h-96 items-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <span className="text-secondaryBg text-lg">Cargando tus cursos...</span>
       </div>
     );
@@ -46,7 +46,7 @@ const PurchasedCourses = () => {
 
   return (
     <div className="min-h-screen py-20">
-      <h3 className="font-engravers pt-4 text-center text-2xl font-semibold">Tus cursos</h3>
+      <h3 className="pt-4 text-center text-2xl font-semibold tracking-tight">Tus cursos</h3>
       <div className="flex flex-wrap justify-around gap-10 pt-4">
         {courses && courses.length > 0 ? (
           <div className="flex flex-wrap justify-around gap-10 pt-4">
@@ -65,7 +65,7 @@ const PurchasedCourses = () => {
                     </div>
 
                     <div className="flex items-center justify-center text-center">
-                      <p className="font-engravers text-lg font-semibold">{course.title}</p>
+                      <p className="text-lg font-semibold tracking-tight">{course.title}</p>
                     </div>
 
                     <p className="text-secondaryLight line-clamp-3 text-sm">{course.description}</p>
@@ -83,10 +83,27 @@ const PurchasedCourses = () => {
             ))}
           </div>
         ) : (
-          <div className="mx-auto my-8 flex flex-col items-center">
-            <p className="mb-4">No tienes cursos comprados aún.</p>
+          <div className="mx-auto my-20 flex max-w-md flex-col items-center justify-center gap-6 text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-24 w-24 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 8c.828 0 1.5.672 1.5 1.5S12.828 11 12 11s-1.5-.672-1.5-1.5S11.172 8 12 8zm0 0v8m0 0h6m-6 0H6"
+              />
+            </svg>
+            <h4 className="text-2xl font-semibold text-gray-700">No tienes cursos aún</h4>
+            <p className="text-gray-500">
+              Explora nuestros cursos y comienza a aprender hoy mismo.
+            </p>
             <Link href="/cursos">
-              <Button size="lg" className="text-xl">
+              <Button size="lg" className="bg-ctas hover:bg-ctas/90 text-white">
                 Comprar cursos
               </Button>
             </Link>

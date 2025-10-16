@@ -106,9 +106,7 @@ export const AdminSamplePacks = () => {
               </div>
 
               <CardHeader className="space-y-3">
-                <CardTitle className="font-heading group-hover:text-accent line-clamp-2 text-xl transition-colors">
-                  {pack.title}
-                </CardTitle>
+                <CardTitle className="font-heading line-clamp-2 text-xl">{pack.title}</CardTitle>
               </CardHeader>
 
               <CardContent className="space-y-4">
@@ -143,7 +141,7 @@ export const AdminSamplePacks = () => {
       )}
 
       <Dialog open={!!confirmId} onOpenChange={() => setConfirmId(null)}>
-        <DialogContent className="glass-effect border-destructive/20">
+        <DialogContent className="glass-effect border-destructive/20 bg-white backdrop-blur-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-3 text-xl">
               <div className="bg-destructive/10 rounded-full p-2">

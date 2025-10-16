@@ -10,7 +10,7 @@ interface TestimonialsProps {
 export const Testimonials = ({ isLandingPage }: TestimonialsProps) => {
   return (
     <Section className="">
-      <p className="font-engravers text-secondaryBg mb-12 text-center text-3xl font-semibold">
+      <p className="text-secondaryBg mb-12 text-center text-3xl font-semibold tracking-tight">
         Experiencias de <span className="text-ctas">nuestra comunidad</span>
       </p>
       <Script

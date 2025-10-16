@@ -17,7 +17,7 @@ const Contact = () => {
       <div className="flex items-center justify-center px-4 pt-16 sm:px-8 md:px-16">
         <div className="w-full max-w-xl space-y-8">
           <div className="space-y-2 text-center md:text-left">
-            <h1 className="text-secondaryBlack font-engravers text-3xl font-bold">
+            <h1 className="text-secondaryBlack text-3xl font-bold tracking-tight">
               Contactate con nosotros
             </h1>
             <div className="flex flex-col justify-center gap-1 md:justify-start">

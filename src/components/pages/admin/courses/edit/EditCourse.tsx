@@ -13,6 +13,7 @@ interface EditCourseProps {
 }
 
 export const EditCourse = ({ id }: EditCourseProps) => {
+  const [originalCourse, setOriginalCourse] = useState<Course | null>(null);
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +22,8 @@ export const EditCourse = ({ id }: EditCourseProps) => {
       try {
         const res = await fetchCourseById(id);
 
+        const cloned = structuredClone(res);
+        setOriginalCourse(cloned);
         setCourse(res);
       } catch (err) {
         console.error(err);
@@ -32,49 +35,83 @@ export const EditCourse = ({ id }: EditCourseProps) => {
     fetchCourse();
   }, [id]);
 
+  const getUpdatedFields = () => {
+    if (!course || !originalCourse) return {};
+    const updated: Record<string, unknown> = {};
+
+    ['title', 'description', 'price', 'duration'].forEach(key => {
+      if (course[key as keyof Course] !== originalCourse[key as keyof Course]) {
+        updated[key] = course[key as keyof Course];
+      }
+    });
+
+    if (course.coverImageUrl !== originalCourse.coverImageUrl) {
+      updated.coverImageUrl = course.coverImageUrl;
+    }
+
+    const originalModules = JSON.stringify(originalCourse.modules);
+    const currentModules = JSON.stringify(
+      course.modules.map(module => ({
+        ...module,
+        chapters: module.chapters.map(ch => ({
+          ...ch,
+          videoUrl:
+            ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl
+              ? 'FILE_PLACEHOLDER'
+              : ch.videoUrl,
+        })),
+      }))
+    );
+
+    console.log('current modules', currentModules);
+
+    if (originalModules !== currentModules) {
+      updated.modules = course.modules;
+    }
+
+    return updated;
+  };
+
   const saveChanges = async () => {
+    if (!course) return;
+
+    const updatedFields = getUpdatedFields();
+
+    if (Object.keys(updatedFields).length === 0) {
+      toast.info('No hay cambios para guardar');
+      return;
+    }
+
     const form = new FormData();
 
-    if (course) {
-      form.append('title', course.title);
-      form.append('description', course.description);
-      form.append('price', course.price.toString());
-      form.append('duration', course.duration.toString());
+    if (typeof updatedFields.coverImageUrl === 'string' && updatedFields.coverImageUrl) {
+      const imageFile = dataURLtoFile(updatedFields.coverImageUrl, 'cover.jpg');
+      form.append('coverImage', imageFile);
+    }
 
-      form.append(
-        'modules',
-        JSON.stringify(
-          course.modules.map((module, modIdx) => ({
-            ...module,
-            chapters: module.chapters?.map((ch, chapIdx) => {
-              const fieldName = `video-${modIdx}-${chapIdx}`;
-              return {
-                ...ch,
-                videoUrl:
-                  ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl
-                    ? fieldName
-                    : '',
-              };
-            }),
-          }))
-        )
-      );
-
-      // Archivos de video
-      course.modules.forEach((mod, modIdx) => {
-        mod.chapters?.forEach((ch, chapIdx) => {
-          const fieldName = `video-${modIdx}-${chapIdx}`;
+    if (updatedFields.modules && Array.isArray(updatedFields.modules)) {
+      (updatedFields.modules as Course['modules']).forEach(mod => {
+        mod.chapters.forEach(ch => {
           if (ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl) {
+            const fieldName = `videos/-${ch.id ?? `${mod.id}-${Date.now()}`}`;
             form.append(fieldName, ch.videoUrl as File);
+            ch.videoUrl = fieldName;
           }
         });
       });
+
+      form.append('modules', JSON.stringify(updatedFields.modules));
     }
 
-    if (course?.coverImageUrl) {
-      const imageFile = dataURLtoFile(course.coverImageUrl, 'cover.jpg');
-      form.append('coverImageUrl', imageFile);
-    }
+    Object.entries(updatedFields).forEach(([key, value]) => {
+      if (key !== 'modules') {
+        if (typeof value === 'string' || value instanceof Blob) {
+          form.append(key, value);
+        } else if (typeof value === 'number' || typeof value === 'boolean') {
+          form.append(key, value.toString());
+        }
+      }
+    });
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/${id}`, {

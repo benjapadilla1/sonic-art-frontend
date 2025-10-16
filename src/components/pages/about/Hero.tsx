@@ -5,7 +5,7 @@ const AboutHero = () => {
   return (
     <Section className="text-secondaryBlack flex flex-col items-center justify-center px-4 py-16">
       <div className="mb-10 max-w-4xl text-center">
-        <h1 className="font-engravers mb-6 text-4xl font-semibold tracking-wide uppercase md:text-5xl">
+        <h1 className="mb-6 text-4xl font-bold tracking-tight uppercase sm:text-5xl">
           La producción musical en su esencia más pura
         </h1>
         <p className="text-lg leading-relaxed md:text-xl">

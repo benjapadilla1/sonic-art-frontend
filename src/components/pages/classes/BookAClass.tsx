@@ -8,10 +8,10 @@ const BookAClass = () => {
 
   return (
     <div className="pt-2">
-      <h1 className="font-engravers text-center text-4xl font-semibold">Clases 1 a 1</h1>
+      <h1 className="text-center text-4xl font-semibold tracking-tight">Clases 1 a 1</h1>
       <p className="mt-4 text-center text-lg">Reserva una clase de una hora conmigo</p>
 
-      <div className="mt-10 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         {isUserLoggedIn ? (
           <Calendar />
         ) : (

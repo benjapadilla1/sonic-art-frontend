@@ -42,7 +42,7 @@ const courses = [
 export const LastReleases = () => {
   return (
     <Section className="bg-secondaryLight">
-      <h2 className="font-engravers text-secondaryBg mb-8 text-center text-3xl font-semibold">
+      <h2 className="text-secondaryBg mb-8 text-center text-3xl font-semibold tracking-tight">
         Últimos <span className="text-ctas">lanzamientos</span>
       </h2>
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-3">
@@ -71,7 +71,7 @@ export const LastReleases = () => {
                 </div>
                 <p className="">{course.duration}</p>
               </div>
-              <p className="font-engravers text-lg font-semibold">{course.title}</p>
+              <p className="text-lg font-semibold tracking-tight">{course.title}</p>
               <p className="flex-1">{course.description}</p>
               <div className="flex-grow" />
               <div className="flex items-center justify-between">
