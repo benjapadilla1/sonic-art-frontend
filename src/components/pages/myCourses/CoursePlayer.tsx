@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { fetchCourseById } from '@/functions/courses/fetchCourseById';
+import { fetchPurchasedCourseById } from '@/functions/courses/fetchPurchasedCourseById';
+import { useAuthStore } from '@/stores/useAuthStore';
 import type { Chapter, Course } from '@/types/firestore';
 import {
   Award,
@@ -25,6 +27,7 @@ import { useEffect, useState } from 'react';
 
 export default function CoursePlayer() {
   const { id } = useParams();
+  const { user, isAdmin, isLoggedIn } = useAuthStore();
   const idStr = Array.isArray(id) ? id[0] : (id ?? '');
 
   const [course, setCourse] = useState<Course | null>(null);
@@ -32,6 +35,7 @@ export default function CoursePlayer() {
   const [completed, setCompleted] = useState<{ [key: string]: number }>({});
   const [loading, setLoading] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!idStr) return;
@@ -53,22 +57,50 @@ export default function CoursePlayer() {
 
   useEffect(() => {
     const loadCourse = async () => {
-      try {
-        const data = await fetchCourseById(idStr);
-        setCourse(data);
+      if (!idStr) return;
+      setLoading(true);
+      setError(null);
 
-        if (data.modules.length > 0 && data.modules[0].chapters.length > 0) {
+      try {
+        // 🧩 Caso 1: usuario no logueado
+        if (!isLoggedIn) {
+          setError('Necesitas iniciar sesión para ver este curso.');
+          return;
+        }
+
+        // 🧩 Caso 2: admin puede ver todos los cursos
+        if (isAdmin) {
+          const data = await fetchCourseById(idStr);
+          setCourse(data);
+          if (data.modules?.length > 0 && data.modules[0].chapters?.length > 0) {
+            setSelectedChapter(data.modules[0].chapters[0]);
+          }
+          return;
+        }
+
+        // 🧩 Caso 3: usuario normal → buscar curso comprado
+        const data = await fetchPurchasedCourseById(idStr, user?.uid ?? '');
+        if (!data) {
+          setError('No tienes acceso a este curso. Asegúrate de haberlo comprado.');
+          return;
+        }
+
+        setCourse(data);
+        if (data.modules?.length > 0 && data.modules[0].chapters?.length > 0) {
           setSelectedChapter(data.modules[0].chapters[0]);
         }
       } catch (err) {
         console.error('Error loading course:', err);
+        setError('Hubo un error al cargar el curso.');
       } finally {
         setLoading(false);
       }
     };
 
-    loadCourse();
-  }, [idStr]);
+    if (isAdmin !== undefined && isAdmin !== null) {
+      loadCourse();
+    }
+  }, [idStr, isAdmin, isLoggedIn, user]);
 
   if (loading) {
     return (
@@ -80,6 +112,28 @@ export default function CoursePlayer() {
             </div>
           </div>
           <p className="text-muted-foreground text-lg font-medium">Cargando curso...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-background flex h-screen items-center justify-center">
+        <div className="max-w-md text-center">
+          <div className="bg-destructive/10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            <BookOpen className="text-destructive h-8 w-8" />
+          </div>
+          <p className="text-destructive text-xl font-semibold">No se puede acceder al curso</p>
+          <p className="text-muted-foreground mt-2">{error}</p>
+          {!user && (
+            <a
+              href="/login"
+              className="bg-primary mt-4 inline-block rounded-lg px-4 py-2 text-white"
+            >
+              Iniciar sesión
+            </a>
+          )}
         </div>
       </div>
     );

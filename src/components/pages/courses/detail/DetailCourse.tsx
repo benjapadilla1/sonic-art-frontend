@@ -31,7 +31,7 @@ const DetailCourse = ({ id }: Props) => {
 
   if (!course) {
     return (
-      <div className="flex h-64 items-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <p className="text-gray-500">Cargando curso...</p>
       </div>
     );
