@@ -9,7 +9,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { fetchCourseById } from '@/functions/courses/fetchCourseById';
 import { fetchPurchasedCourseById } from '@/functions/courses/fetchPurchasedCourseById';
 import { useAuthStore } from '@/stores/useAuthStore';
 import type { Chapter, Course } from '@/types/firestore';
@@ -28,7 +27,7 @@ import { useEffect, useState } from 'react';
 
 export default function CoursePlayer() {
   const { id } = useParams();
-  const { user, isAdmin, isLoggedIn } = useAuthStore();
+  const { user, isLoggedIn } = useAuthStore();
 
   const idStr = Array.isArray(id) ? id[0] : (id ?? '');
 
@@ -64,22 +63,13 @@ export default function CoursePlayer() {
       setError('');
 
       try {
-        // 🧩 Caso 1: usuario no logueado
         if (!isLoggedIn) {
           setError('Necesitas iniciar sesión para ver este curso.');
           return;
         }
 
-        if (isAdmin) {
-          const data = await fetchCourseById(idStr);
-          setCourse(data);
-          if (data.modules?.length > 0 && data.modules[0].chapters?.length > 0) {
-            setSelectedChapter(data.modules[0].chapters[0]);
-          }
-          return;
-        }
+        const data = await fetchPurchasedCourseById(user?.uid ?? '', idStr);
 
-        const data = await fetchPurchasedCourseById(idStr, user?.uid ?? '');
         if (!data) {
           setError('No tienes acceso a este curso. Asegúrate de haberlo comprado.');
           return;
@@ -98,7 +88,7 @@ export default function CoursePlayer() {
     };
 
     loadCourse();
-  }, [idStr, isAdmin, isLoggedIn, user]);
+  }, [idStr, isLoggedIn, user]);
 
   if (loading) {
     return (
