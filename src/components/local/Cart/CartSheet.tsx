@@ -20,20 +20,41 @@ export function CartSheet() {
   const { user } = useAuthStore();
 
   const handleCheckout = async () => {
+    if (!user?.uid) {
+      toast.error('Debes iniciar sesión para realizar la compra');
+      return;
+    }
+
+    if (items.length === 0) {
+      toast.error('El carrito está vacío');
+      return;
+    }
+
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/paypal/create-order`,
-        { items, userId: user?.uid },
+        { items, userId: user.uid },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
       const { href } = res.data;
       if (href) {
         window.location.href = href;
+      } else {
+        toast.error('No se pudo obtener el enlace de pago');
       }
     } catch (error: unknown) {
-      if (axios.isAxiosError(error) && error.response?.status === 409) {
-        toast.error('Uno o más items ya fueron comprados.');
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          toast.error('Uno o más items ya fueron comprados.');
+        } else if (error.response?.status === 401) {
+          toast.error('Debes iniciar sesión para realizar la compra');
+        } else {
+          const errorMessage = error.response?.data?.error || 'Error al crear la orden de PayPal';
+          toast.error(errorMessage);
+        }
+      } else {
+        toast.error('Error al crear la orden de PayPal');
       }
       console.error('Error al crear la orden de PayPal:', error);
     }

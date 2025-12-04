@@ -17,8 +17,11 @@ export async function login({ email, password }: LogObject) {
 
   if (!res.ok) throw new Error('Error de login');
 
-  const { token } = await res.json();
+  const { token, refreshToken } = await res.json();
   localStorage.setItem('auth_token', token);
+  if (refreshToken) {
+    localStorage.setItem('refresh_token', refreshToken);
+  }
   toast.success('Inicio de sesión exitoso', { autoClose: 2000 });
-  loginFunction(token);
+  loginFunction(token, refreshToken);
 }

@@ -15,7 +15,7 @@ export async function handleGoogleLoginSuccess(
   }
 
   try {
-    const { data } = await axios.post<{ token: string }>(
+    const { data } = await axios.post<{ token: string; refreshToken: string }>(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
       { idToken }
     );
@@ -23,7 +23,7 @@ export async function handleGoogleLoginSuccess(
     const login = useAuthStore.getState().login;
     const fetchAdminStatus = useAuthStore.getState().fetchAdminStatus;
 
-    login(data.token);
+    login(data.token, data.refreshToken);
 
     await fetchAdminStatus();
 

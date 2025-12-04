@@ -1,6 +1,7 @@
 import Analytics from '@/components/analytics/Analytics';
 import { Footer } from '@/components/local/Footer/Footer';
 import NavBar from '@/components/local/Navbar/NavBar';
+import { AuthProvider } from '@/components/providers/AuthProvider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -60,13 +61,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         className={`${geistSans.variable} bg-backgroundLight ${geistMono.variable} antialiased`}
       >
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-          <ToastContainer />
-          <Suspense fallback={null}>
-            <Analytics />
-          </Suspense>
-          <NavBar />
-          <main>{children}</main>
-          <Footer />
+          <AuthProvider>
+            <ToastContainer />
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
+            <NavBar />
+            <main>{children}</main>
+            <Footer />
+          </AuthProvider>
         </GoogleOAuthProvider>
       </body>
     </html>

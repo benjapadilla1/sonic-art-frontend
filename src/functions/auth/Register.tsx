@@ -1,4 +1,5 @@
 import { LogObject } from '@/components/pages/auth/AuthForm';
+import { useAuthStore } from '@/stores/useAuthStore';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -12,7 +13,12 @@ export async function register({ email, password, displayName, captcha }: LogObj
       }
     );
 
+    const login = useAuthStore.getState().login;
     localStorage.setItem('auth_token', data.token);
+    if (data.refreshToken) {
+      localStorage.setItem('refresh_token', data.refreshToken);
+    }
+    login(data.token, data.refreshToken);
     toast.success('Registro exitoso', { autoClose: 2000 });
   } catch (error: unknown) {
     console.error('Error en registro:', error);

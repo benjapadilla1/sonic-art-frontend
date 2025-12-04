@@ -14,7 +14,12 @@ export default function Page() {
     const capture = async () => {
       const params = new URLSearchParams(window.location.search);
       const token = params.get('token');
-      if (!token) return;
+      
+      if (!token) {
+        toast.error('Token de pago no encontrado');
+        router.push('/');
+        return;
+      }
 
       try {
         await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/paypal/capture-order`, null, {
@@ -24,8 +29,14 @@ export default function Page() {
         clearCart();
         router.push('/mis-cursos');
       } catch (error) {
-        console.error(error);
-        toast.error('Error al procesar el pago');
+        console.error('Error capturing payment:', error);
+        if (axios.isAxiosError(error)) {
+          const errorMessage = error.response?.data?.error || 'Error al procesar el pago';
+          toast.error(errorMessage);
+        } else {
+          toast.error('Error al procesar el pago');
+        }
+        router.push('/');
       }
     };
 
