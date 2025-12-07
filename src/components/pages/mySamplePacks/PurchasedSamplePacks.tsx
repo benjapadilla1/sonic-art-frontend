@@ -15,11 +15,12 @@ const PurchasedSamplePacks = () => {
   const router = useRouter();
   const { isLoggedIn, user } = useAuthStore();
 
-  if (!isLoggedIn) {
-    router.push('/acceso');
-  }
-
   useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/acceso');
+      return;
+    }
+
     const loadSamplePacks = async () => {
       try {
         setLoading(true);
@@ -34,7 +35,7 @@ const PurchasedSamplePacks = () => {
     };
 
     loadSamplePacks();
-  }, [user?.uid]);
+  }, [isLoggedIn, router, user?.uid]);
 
   if (loading) {
     return (

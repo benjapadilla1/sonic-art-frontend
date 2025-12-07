@@ -15,11 +15,12 @@ const PurchasedCourses = () => {
   const router = useRouter();
   const { isLoggedIn, user } = useAuthStore();
 
-  if (!isLoggedIn) {
-    router.push('/acceso');
-  }
-
   useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/acceso');
+      return;
+    }
+
     const loadCourses = async () => {
       try {
         setLoading(true);
@@ -34,7 +35,7 @@ const PurchasedCourses = () => {
     };
 
     loadCourses();
-  }, [user?.uid]);
+  }, [isLoggedIn, router, user?.uid]);
 
   if (loading) {
     return (
