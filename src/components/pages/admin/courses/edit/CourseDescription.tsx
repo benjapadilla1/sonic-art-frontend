@@ -88,6 +88,34 @@ const CourseDescription = ({ course, setCourse }: CourseDescriptionProps) => {
               </div>
             )}
           </div>
+
+          <div className="flex flex-col space-y-1">
+            <Label htmlFor="introVideo">Video de introducción</Label>
+            <Input
+              id="introVideo"
+              type="file"
+              accept="video/*"
+              onChange={e => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setCourse(prev =>
+                      prev ? { ...prev, introVideoUrl: reader.result as string } : null
+                    );
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+            {course.introVideoUrl && typeof course.introVideoUrl === 'string' && (
+              <video
+                src={course.introVideoUrl}
+                controls
+                className="mt-2 max-h-60 rounded-md border"
+              />
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>

@@ -20,8 +20,8 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    imageUrl: '',
-    previewUrls: ['', ''],
+    coverImageUrl: '',
+    previewTracks: ['', ''],
     downloadUrl: '',
     price: '',
   });
@@ -39,8 +39,8 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
         setFormData({
           title: data.title,
           description: data.description,
-          imageUrl: data.imageUrl,
-          previewUrls: data.previewUrls || ['', ''],
+          coverImageUrl: data.coverImageUrl,
+          previewTracks: data.previewTracks || ['', ''],
           downloadUrl: data.downloadUrl,
           price: data.price.toString(),
         });
@@ -60,9 +60,9 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
     if (name.startsWith('preview-')) {
       const index = Number(name.split('-')[1]);
-      const updated = [...formData.previewUrls];
+      const updated = [...formData.previewTracks];
       updated[index] = value;
-      setFormData(prev => ({ ...prev, previewUrls: updated }));
+      setFormData(prev => ({ ...prev, previewTracks: updated }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -136,10 +136,10 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
       <div className="space-y-2">
         <Label>Imagen actual</Label>
-        {formData.imageUrl && (
+        {formData.coverImageUrl && (
           <Image
             fill
-            src={formData.imageUrl}
+            src={formData.coverImageUrl}
             alt="Cover"
             className="h-32 w-auto rounded object-cover"
           />
@@ -153,7 +153,7 @@ export const EditSamplePack = ({ id }: EditSamplePackProps) => {
 
       <div className="space-y-2">
         <Label>Previews actuales</Label>
-        {formData.previewUrls.map((url, idx) => (
+        {formData.previewTracks.map((url, idx) => (
           <div key={idx} className="space-y-1">
             {url && (
               <audio controls src={url} className="w-full">

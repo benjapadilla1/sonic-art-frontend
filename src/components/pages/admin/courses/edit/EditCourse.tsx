@@ -49,6 +49,10 @@ export const EditCourse = ({ id }: EditCourseProps) => {
       updated.coverImageUrl = course.coverImageUrl;
     }
 
+    if (course.introVideoUrl !== originalCourse.introVideoUrl) {
+      updated.introVideoUrl = course.introVideoUrl;
+    }
+
     const originalModules = JSON.stringify(originalCourse.modules);
     const currentModules = JSON.stringify(
       course.modules.map(module => ({
@@ -89,11 +93,20 @@ export const EditCourse = ({ id }: EditCourseProps) => {
       form.append('coverImage', imageFile);
     }
 
+    if (
+      updatedFields.introVideoUrl &&
+      typeof updatedFields.introVideoUrl === 'object' &&
+      'type' in updatedFields.introVideoUrl
+    ) {
+      form.append('introVideo', updatedFields.introVideoUrl as File);
+      delete updatedFields.introVideoUrl;
+    }
+
     if (updatedFields.modules && Array.isArray(updatedFields.modules)) {
-      (updatedFields.modules as Course['modules']).forEach(mod => {
-        mod.chapters.forEach(ch => {
+      (updatedFields.modules as Course['modules']).forEach((mod, modIdx) => {
+        mod.chapters.forEach((ch, chapIdx) => {
           if (ch.videoUrl && typeof ch.videoUrl === 'object' && 'type' in ch.videoUrl) {
-            const fieldName = `videos/-${ch.id ?? `${mod.id}-${Date.now()}`}`;
+            const fieldName = `video-${modIdx}-${chapIdx}`;
             form.append(fieldName, ch.videoUrl as File);
             ch.videoUrl = fieldName;
           }
