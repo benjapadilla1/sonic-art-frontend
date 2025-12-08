@@ -58,22 +58,28 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
                   {samplePack.description}
                 </p>
 
-                <div className="text-ctas text-4xl font-bold">${samplePack.price}</div>
+                <div className="text-ctas text-4xl font-bold">
+                  {samplePack.price === 0 ? 'Gratis' : `$${samplePack.price}`}
+                </div>
               </div>
 
               <Button
                 className="rounded-xl py-6 text-lg font-semibold"
-                onClick={() =>
-                  addItem({
-                    id: samplePack.id,
-                    title: samplePack.title,
-                    type: 'samplePack',
-                    price: Number(samplePack.price),
-                    coverImageUrl: samplePack.coverImageUrl ?? '',
-                  })
-                }
+                onClick={() => {
+                  if (samplePack.price === 0) {
+                    window.open(samplePack.downloadUrl, '_blank');
+                  } else {
+                    addItem({
+                      id: samplePack.id,
+                      title: samplePack.title,
+                      type: 'samplePack',
+                      price: Number(samplePack.price),
+                      coverImageUrl: samplePack.coverImageUrl ?? '',
+                    });
+                  }
+                }}
               >
-                Agregar al carrito
+                {samplePack.price === 0 ? 'Descargar' : 'Agregar al carrito'}
               </Button>
             </div>
           </CardContent>

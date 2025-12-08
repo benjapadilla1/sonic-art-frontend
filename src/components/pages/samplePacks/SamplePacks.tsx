@@ -71,36 +71,37 @@ const SamplePacks = () => {
 
                 <p className="text-secondaryLight line-clamp-3 text-sm">{samplePack.description}</p>
 
-                {samplePack.previewTracks?.length > 0 && (
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Preview:</p>
-                    {samplePack.previewTracks.map((track, index) => (
-                      <audio key={index} controls src={track} className="w-full rounded" />
-                    ))}
-                  </div>
-                )}
-
                 <div className="flex-grow" />
 
                 <div className="flex items-center justify-between">
                   <p className="flex gap-1 text-white">
-                    <span className="text-ctas">$</span>
-                    {samplePack.price}
+                    {samplePack.price === 0 ? (
+                      <span className="text-ctas font-semibold">Gratis</span>
+                    ) : (
+                      <>
+                        <span className="text-ctas">$</span>
+                        {samplePack.price}
+                      </>
+                    )}
                   </p>
                   <Button
                     onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
-                      addItem({
-                        id: samplePack.id,
-                        title: samplePack.title,
-                        type: 'samplePack',
-                        price: Number(samplePack.price),
-                        coverImageUrl: samplePack.coverImageUrl ?? '',
-                      });
+                      if (samplePack.price === 0) {
+                        window.location.href = `/sample-packs/${samplePack.id}`;
+                      } else {
+                        addItem({
+                          id: samplePack.id,
+                          title: samplePack.title,
+                          type: 'samplePack',
+                          price: Number(samplePack.price),
+                          coverImageUrl: samplePack.coverImageUrl ?? '',
+                        });
+                      }
                     }}
                   >
-                    <p>Añadir al carrito</p>
+                    <p>{samplePack.price === 0 ? 'Ver detalles' : 'Añadir al carrito'}</p>
                   </Button>
                 </div>
               </div>
