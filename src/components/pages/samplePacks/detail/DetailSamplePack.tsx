@@ -3,10 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { fetchSamplePackById } from '@/functions/samplePacks/fetchCourseById';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { useCartStore } from '@/stores/useCartStore';
 import { SamplePack } from '@/types/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { FAQs } from '../FAQs';
 
 type DetailSamplePackProps = {
@@ -16,6 +18,7 @@ type DetailSamplePackProps = {
 const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
   const [samplePack, setSamplePack] = useState<SamplePack | null>(null);
   const { addItem } = useCartStore();
+  const { isLoggedIn } = useAuthStore();
 
   useEffect(() => {
     const fetchSamplePack = async () => {
@@ -67,6 +70,10 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
                 className="rounded-xl py-6 text-lg font-semibold"
                 onClick={() => {
                   if (samplePack.price === 0) {
+                    if (!isLoggedIn) {
+                      toast.error('Debes iniciar sesión para descargar');
+                      return;
+                    }
                     window.open(samplePack.downloadUrl, '_blank');
                   } else {
                     addItem({
