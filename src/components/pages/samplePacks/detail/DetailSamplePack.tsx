@@ -5,15 +5,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { fetchSamplePackById } from '@/functions/samplePacks/fetchCourseById';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useCartStore } from '@/stores/useCartStore';
-import { SamplePack } from '@/types/firestore';
+import type { SamplePack } from '@/types/firestore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { FAQs } from '../FAQs';
+import { AudioWaveformPlayer } from './AudioWaveformPlayer';
 
-type DetailSamplePackProps = {
+interface DetailSamplePackProps {
   id: string;
-};
+}
 
 const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
   const [samplePack, setSamplePack] = useState<SamplePack | null>(null);
@@ -32,7 +33,10 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
   if (!samplePack) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <p className="text-gray-500">Cargando Sample Pack...</p>
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-300 border-t-blue-500" />
+          <p className="text-gray-500 dark:text-gray-400">Cargando Sample Pack...</p>
+        </div>
       </div>
     );
   }
@@ -93,30 +97,17 @@ const DetailSamplePack = ({ id }: DetailSamplePackProps) => {
         </Card>
 
         <div className="mt-10">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight text-gray-900">
+          <h2 className="mb-6 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Escucha un adelanto
           </h2>
           {samplePack.previewTracks && samplePack.previewTracks.length > 0 ? (
-            <div className="space-y-8">
+            <div className="space-y-4">
               {samplePack.previewTracks.map((preview, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-xl border border-gray-200 bg-white p-5 shadow-md transition hover:shadow-lg"
-                >
-                  <p className="mb-3 text-gray-700">Preview {idx + 1}</p>
-                  <audio
-                    controls
-                    controlsList="nodownload noplaybackrate"
-                    className="w-full rounded-lg"
-                  >
-                    <source src={preview} type="audio/mpeg" />
-                    Tu navegador no soporta el reproductor de audio.
-                  </audio>
-                </div>
+                <AudioWaveformPlayer key={idx} audioUrl={preview} trackNumber={idx + 1} />
               ))}
             </div>
           ) : (
-            <p className="text-gray-500">Todavía no hay previews disponibles.</p>
+            <p className="text-gray-500 dark:text-gray-400">Todavía no hay previews disponibles.</p>
           )}
         </div>
       </div>
